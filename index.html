@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CEASAR RIKO — DKV Creative & Photographer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Space Grotesk, Plus Jakarta Sans, JetBrains Mono, Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for UI & Social Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FAF9F6',
+            ink: '#18181B',
+            lavender: '#8B7CFF',
+            lime: '#B8F256',
+            pink: '#FF85A1',
+            butter: '#FDE047',
+            sky: '#A5F3FC',
+            mint: '#BBF7D0'
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            script: ['"Caveat"', 'cursive']
+          },
+          boxShadow: {
+            brutal: '4px 4px 0px 0px #18181B',
+            'brutal-lg': '6px 6px 0px 0px #18181B',
+            'brutal-sm': '2px 2px 0px 0px #18181B',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Graph Paper & Grid Textures matching initial design */
+    .bg-graph-paper {
+      background-color: #FAF9F6;
+      background-image: 
+        linear-gradient(to right, rgba(24, 24, 27, 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(24, 24, 27, 0.07) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .bg-pink-grid {
+      background-color: #FF85A1;
+      background-image: 
+        linear-gradient(to right, rgba(24, 24, 27, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(24, 24, 27, 0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .bg-purple-grid {
+      background-color: #8B7CFF;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    /* Neobrutalist Interactive Button States */
+    .btn-brutal {
+      border: 2px solid #18181B;
+      box-shadow: 4px 4px 0px 0px #18181B;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
+    }
+    .btn-brutal:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px 0px #18181B;
+    }
+    .btn-brutal:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px 0px #18181B;
+    }
+
+    /* Translucent Washi Masking Tape */
+    .washi-tape {
+      background-color: rgba(253, 224, 71, 0.9);
+      border-left: 1px dashed rgba(24, 24, 27, 0.35);
+      border-right: 1px dashed rgba(24, 24, 27, 0.35);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+    }
+
+    /* Floating OS Folder Hover Animation */
+    .os-folder {
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .os-folder:hover {
+      transform: translateY(-5px) scale(1.06);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF9F6;
+      border-left: 2px solid #18181B;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #8B7CFF;
+      border: 2px solid #18181B;
+    }
+
+    /* Print Styles for CV Modal */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #cv-printable-area, #cv-printable-area * {
+        visibility: visible;
+      }
+      #cv-printable-area {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none !important;
+        border: none !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-cream text-ink font-sans antialiased selection:bg-lime selection:text-ink overflow-x-hidden">
+
+  <!-- Main Outer Neobrutalist Container -->
+  <div class="max-w-[1380px] mx-auto my-0 sm:my-4 md:my-6 border-x-0 sm:border-2 border-ink bg-cream shadow-none sm:shadow-brutal-lg">
+
+    <!-- ==================== 1. TOP NAVBAR ==================== -->
+    <header class="sticky top-0 z-40 bg-cream border-b-2 border-ink flex items-stretch justify-between">
+      <!-- Brand Badge (Lime Block) -->
+      <a href="#" class="bg-lime px-4 sm:px-6 py-3.5 border-r-2 border-ink flex items-center gap-2 font-display font-bold text-base sm:text-lg tracking-tight hover:bg-butter transition-colors">
+        <span class="inline-block w-2.5 h-2.5 bg-ink rounded-full"></span>
+        <span>RIKO PRIYO</span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 font-mono text-xs lg:text-sm font-bold tracking-wider">
+        <a href="#about" class="hover:text-lavender transition-colors py-1">ABOUT</a>
+        <a href="#featured-works" class="hover:text-lavender transition-colors py-1">FEATURED WORKS</a>
+        <a href="#featured-works" class="hover:text-lavender transition-colors py-1">EXPERIENCE</a>
+        <a href="#skills-edu" class="hover:text-lavender transition-colors py-1">SKILLS</a>
+      </nav>
+
+      <!-- Right Actions: Mobile Menu Toggle + Contact CTA -->
+      <div class="flex items-stretch">
+        <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden px-4 border-l-2 border-ink bg-cream hover:bg-butter flex items-center justify-center">
+          <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+        <a href="#contact" class="bg-lavender text-white font-mono font-bold text-xs sm:text-sm px-4 sm:px-6 py-3.5 border-l-2 border-ink flex items-center gap-2 hover:bg-ink transition-colors">
+          <span>CONTACT ME</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobile-nav" class="hidden md:hidden bg-butter border-b-2 border-ink px-6 py-4 font-mono text-sm font-bold space-y-3">
+      <a href="#about" class="block hover:underline">01. ABOUT ME</a>
+      <a href="#featured-works" class="block hover:underline">02. FEATURED WORKS &amp; EXPERIENCE</a>
+      <a href="#skills-edu" class="block hover:underline">03. SKILLS &amp; EDUCATION</a>
+      <a href="#contact" class="block hover:underline">04. CONTACT &amp; LINKS</a>
+    </div>
+
+    <!-- ==================== 2. HERO & ABOUT SECTION ==================== -->
+    <section id="about" class="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-ink">
+      
+      <!-- Left Column: Coral Pink Block + Taped Polaroid Portrait + Floating OS Folders (5 cols) -->
+      <div class="lg:col-span-5 bg-pink-grid p-6 sm:p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-ink relative flex flex-col items-center justify-center min-h-[470px]">
+        
+        <!-- OS Window Header Bar -->
+        <div class="w-full max-w-sm mb-5 flex items-center justify-between bg-cream border-2 border-ink px-3 py-1.5 rounded-t-lg shadow-brutal-sm">
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-full bg-pink border border-ink"></span>
+            <span class="w-3 h-3 rounded-full bg-butter border border-ink"></span>
+            <span class="w-3 h-3 rounded-full bg-lime border border-ink"></span>
+          </div>
+          <span class="font-mono text-[11px] font-bold">riko_priyo_2026.dmg</span>
+          <i class="fa-solid fa-camera text-xs"></i>
+        </div>
+
+        <!-- Collage Stage with Floating Folders & Taped Polaroid -->
+        <div class="relative w-full max-w-sm flex flex-col items-center">
+          
+          <!-- Floating OS Folder 1: Top Right (ftirs_its_01) -->
+          <button onclick="filterAndScroll('its')" title="Jump to FTIRS ITS Experience" class="os-folder absolute -top-3 -right-1 sm:-right-5 z-20 flex flex-col items-center cursor-pointer focus:outline-none">
+            <svg class="w-14 h-12 drop-shadow-[2px_2px_0px_#18181B]" viewBox="0 0 64 52" fill="none">
+              <path d="M2 8C2 4.68629 4.68629 2 8 2H22L28 9H56C59.3137 9 62 11.6863 62 15V44C62 47.3137 59.3137 50 56 50H8C4.68629 50 2 47.3137 2 44V8Z" fill="#A5F3FC" stroke="#18181B" stroke-width="2.5"/>
+              <path d="M2 16H62V44C62 47.3137 59.3137 50 56 50H8C4.68629 50 2 47.3137 2 44V16Z" fill="#CFFAFE" stroke="#18181B" stroke-width="2.5"/>
+            </svg>
+            <span class="mt-1 bg-cream border border-ink px-1.5 py-0.5 font-mono text-[10px] font-bold rounded shadow-brutal-sm hover:bg-lime">adaptable</span>
+          </button>
+
+          <!-- Floating OS Folder 2: Bottom Left (andrewarna_02) -->
+          <button onclick="filterAndScroll('andrewarna')" title="Jump to Andrewarna Experience" class="os-folder absolute bottom-6 -left-2 sm:-left-6 z-20 flex flex-col items-center cursor-pointer focus:outline-none">
+            <svg class="w-14 h-12 drop-shadow-[2px_2px_0px_#18181B]" viewBox="0 0 64 52" fill="none">
+              <path d="M2 8C2 4.68629 4.68629 2 8 2H22L28 9H56C59.3137 9 62 11.6863 62 15V44C62 47.3137 59.3137 50 56 50H8C4.68629 50 2 47.3137 2 44V8Z" fill="#B8F256" stroke="#18181B" stroke-width="2.5"/>
+              <path d="M2 16H62V44C62 47.3137 59.3137 50 56 50H8C4.68629 50 2 47.3137 2 44V16Z" fill="#D9F99D" stroke="#18181B" stroke-width="2.5"/>
+            </svg>
+            <span class="mt-1 bg-cream border border-ink px-1.5 py-0.5 font-mono text-[10px] font-bold rounded shadow-brutal-sm hover:bg-butter">resilient</span>
+          </button>
+
+          <!-- Floating OS Folder 3: Bottom Right (cv_riko.pdf) -->
+          <button onclick="openCVModal()" title="Open Interactive CV" class="os-folder absolute -bottom-3 -right-1 sm:-right-4 z-20 flex flex-col items-center cursor-pointer focus:outline-none">
+            <svg class="w-14 h-12 drop-shadow-[2px_2px_0px_#18181B]" viewBox="0 0 64 52" fill="none">
+              <path d="M2 8C2 4.68629 4.68629 2 8 2H22L28 9H56C59.3137 9 62 11.6863 62 15V44C62 47.3137 59.3137 50 56 50H8C4.68629 50 2 47.3137 2 44V8Z" fill="#FDE047" stroke="#18181B" stroke-width="2.5"/>
+              <path d="M2 16H62V44C62 47.3137 59.3137 50 56 50H8C4.68629 50 2 47.3137 2 44V16Z" fill="#FEF08A" stroke="#18181B" stroke-width="2.5"/>
+            </svg>
+            <span class="mt-1 bg-cream border border-ink px-1.5 py-0.5 font-mono text-[10px] font-bold rounded shadow-brutal-sm hover:bg-lime">visionary</span>
+          </button>
+
+          <!-- Stacked Polaroid Photo Frame with User's Uploaded Image -->
+          <div class="relative">
+            <!-- Back Stacked Polaroid Sheet -->
+            <div class="absolute inset-0 bg-cream border-2 border-ink shadow-brutal translate-x-2.5 translate-y-2 rotate-2"></div>
+
+            <!-- Main Front Polaroid Card -->
+            <div class="relative bg-cream p-3.5 pb-6 border-2 border-ink shadow-brutal-lg -rotate-2 w-64 sm:w-72 z-10">
+              <!-- Yellow Masking Tape Strip Top-Left -->
+              <div class="washi-tape w-24 h-6 absolute -top-3 -left-5 -rotate-45 z-20"></div>
+              <!-- Yellow Masking Tape Strip Bottom-Right -->
+              <div class="washi-tape w-16 h-5 absolute -bottom-2 -right-3 -rotate-45 z-20"></div>
+
+              <!-- Photo Container -->
+              <div class="w-full h-72 bg-sky border-2 border-ink overflow-hidden relative">
+                <img 
+                  src="foto-ceasar-riko.jpeg" 
+                  alt="Ceasar Riko Priyo Susantio" 
+                  class="w-full h-full object-cover object-top"
+                  onerror="this.onerror=null; this.src='https://placehold.co/400x480/A5F3FC/18181B?text=Ceasar+Riko+%0ADKV+Surabaya';"
+                />
+                <span class="absolute bottom-2 right-2 bg-lime text-ink font-mono text-[10px] font-bold px-2 py-0.5 border border-ink shadow-brutal-sm">
+                  SURABAYA, ID
+                </span>
+              </div>
+
+              <!-- Handwritten Caption -->
+              <div class="mt-3 text-center">
+                <p class="font-script text-2xl font-bold leading-none text-ink">Hi, I'm Riko!</p>
+                <p class="font-mono text-[11px] font-semibold text-ink/80 mt-1">DKV student based in Surabaya</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right Column: Graph Paper + Name + About Me OS Window + CV & Socials (7 cols) -->
+      <div class="lg:col-span-7 bg-graph-paper p-6 sm:p-10 lg:p-12 flex flex-col justify-between">
+        <div>
+          <!-- Top Status Pill -->
+          <div class="inline-flex items-center gap-2 bg-lavender text-white font-mono font-bold text-xs px-3 py-1.5 border-2 border-ink shadow-brutal-sm mb-4">
+            <span>PORTFOLIO 2026 // SMKN 10 SURABAYA</span>
+          </div>
+
+          <!-- Display Heading -->
+          <h1 class="font-display font-bold text-5xl sm:text-6xl xl:text-7xl leading-[0.95] tracking-tight uppercase text-ink">
+            CEASAR RIKO
+          </h1>
+          <p class="font-display font-bold text-lg sm:text-2xl uppercase tracking-wide text-ink mt-1.5 mb-6">
+            DKV CREATIVE &amp; PHOTOGRAPHER
+          </p>
+
+          <!-- Yellow OS Window Card: ABOUT ME -->
+          <div class="relative bg-butter border-2 border-ink rounded-xl shadow-brutal-lg p-5 sm:p-6 mb-7">
+            <!-- Folder Tab Accent on Top Right -->
+            <div class="absolute -top-3.5 right-6 bg-mint border-2 border-ink px-2.5 py-0.5 rounded-t-md font-mono text-[10px] font-bold">
+              ABOUT_ME.TXT
+            </div>
+
+            <div class="flex items-center justify-between border-b-2 border-ink pb-2 mb-3">
+              <h2 class="font-display font-bold text-xl uppercase tracking-tight">ABOUT ME</h2>
+              <span class="font-mono text-xs font-bold bg-cream px-2 py-0.5 border border-ink rounded">Ceasar Riko Priyo Susantio</span>
+            </div>
+
+            <p class="font-sans text-sm sm:text-[15px] text-ink leading-relaxed font-medium">
+              I am a vocational high school student majoring in <strong>Visual Communication Design (DKV)</strong> with experience in graphic design, photography, and social media management. I adapt quickly to new environments, enjoy working behind the scenes, and am always eager to learn new skills. During my internship, I was trusted to handle event documentation and social media content, which strengthened both my technical and teamwork abilities. I am looking for opportunities to grow professionally while contributing through creativity, responsibility, and dedication.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bottom Action Row: Download/View CV + Let's Connect Card -->
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-stretch">
+          
+          <!-- CV Action Buttons (5 cols) -->
+          <div class="sm:col-span-5 flex flex-col justify-between gap-3">
+            <button onclick="openCVModal()" class="btn-brutal w-full bg-lime hover:bg-butter text-ink font-display font-bold text-base sm:text-lg px-5 py-3.5 rounded-lg flex items-center justify-center gap-2.5">
+              <span>VIEW &amp; DOWNLOAD CV</span>
+              <i class="fa-solid fa-file-arrow-down"></i>
+            </button>
+            <button onclick="downloadCVFile()" class="btn-brutal w-full bg-white hover:bg-sky text-ink font-mono font-bold text-xs px-4 py-2.5 rounded-lg flex items-center justify-center gap-2">
+              <i class="fa-solid fa-download"></i>
+              <span>SAVE CV FILE (.HTML)</span>
+            </button>
+          </div>
+
+          <!-- Let's Connect Box with Direct IG & Email Links (7 cols) -->
+          <div class="sm:col-span-7 bg-white border-2 border-ink rounded-lg shadow-brutal p-4 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-display font-bold text-sm uppercase tracking-wider">LET'S CONNECT</span>
+              <span class="font-mono text-[10px] font-bold bg-mint border border-ink px-2 py-0.5 rounded-full">AVAILABLE</span>
+            </div>
+
+            <div class="space-y-2">
+              <!-- Instagram Direct Link -->
+              <a href="https://www.instagram.com/softmodification/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-cream hover:bg-pink/30 border border-ink px-3 py-1.5 rounded font-mono text-xs font-bold transition-colors">
+                <span class="flex items-center gap-2">
+                  <i class="fa-brands fa-instagram text-base"></i>
+                  <span>@softmodification</span>
+                </span>
+                <span class="text-[10px] underline">OPEN IG ↗</span>
+              </a>
+
+              <!-- Email & Copy Action -->
+              <div class="flex items-center justify-between bg-cream border border-ink px-3 py-1.5 rounded font-mono text-xs font-bold">
+                <a href="mailto:rikopriyo58@gmail.com" class="flex items-center gap-2 hover:underline truncate">
+                  <i class="fa-solid fa-envelope text-sm"></i>
+                  <span class="truncate">rikopriyo58@gmail.com</span>
+                </a>
+                <button onclick="copyText('rikopriyo58@gmail.com', 'Email')" class="ml-2 bg-butter border border-ink px-1.5 py-0.5 rounded text-[10px] hover:bg-lime shrink-0">
+                  COPY
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. FEATURED WORKS & EXPERIENCE (ONLY THE 2 ITEMS) ==================== -->
+    <section id="featured-works" class="border-b-2 border-ink bg-graph-paper p-6 sm:p-10 lg:p-12">
+      
+      <!-- Section Header + Filter Controls -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+        <div>
+          <span class="inline-block bg-butter border-2 border-ink px-3 py-1 rounded font-mono text-xs font-bold shadow-brutal-sm mb-2">
+            2026 INTERNSHIP &amp; CREATIVE TRACK RECORD
+          </span>
+          <h2 class="font-display font-bold text-3xl sm:text-5xl uppercase tracking-tight text-ink">
+            FEATURED WORKS &amp; EXPERIENCE
+          </h2>
+        </div>
+
+        <!-- Interactive Filter Pills -->
+        <div class="flex flex-wrap gap-2" id="work-filters">
+          <button data-filter="all" class="filter-btn btn-brutal bg-ink text-white font-mono text-xs font-bold px-3.5 py-2 rounded-md">
+            ALL (02)
+          </button>
+          <button data-filter="its" class="filter-btn btn-brutal bg-white text-ink font-mono text-xs font-bold px-3.5 py-2 rounded-md">
+            FTIRS ITS SURABAYA
+          </button>
+          <button data-filter="andrewarna" class="filter-btn btn-brutal bg-white text-ink font-mono text-xs font-bold px-3.5 py-2 rounded-md">
+            ANDREWARNA ADVERTISING
+          </button>
+        </div>
+      </div>
+
+      <!-- Two-Column Staggered Collage Grid (Strictly 2 Experiences/Works) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+
+        <!-- ==================== EXPERIENCE & WORK 1: FTIRS ITS SURABAYA ==================== -->
+        <article data-category="its" class="work-card flex flex-col gap-5">
+          <!-- Main Experience Card (Mint Green Header + Cream Body) -->
+          <div class="bg-white border-2 border-ink rounded-xl shadow-brutal-lg overflow-hidden">
+            <!-- Colored Top Header Block -->
+            <div class="bg-mint border-b-2 border-ink p-5 sm:p-6">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <span class="font-mono text-xs font-bold bg-cream border border-ink px-2.5 py-0.5 rounded shadow-brutal-sm">
+                  [February 2026 – April 2026]
+                </span>
+                <span class="font-mono text-xs font-bold uppercase text-ink/80">EXP // 01</span>
+              </div>
+
+              <h3 class="font-display font-bold text-2xl sm:text-3xl leading-tight text-ink">
+                Faculty of Industrial Technology and Systems Engineering ITS Surabaya
+              </h3>
+              <p class="font-mono text-xs sm:text-sm font-bold text-ink/90 mt-1.5">
+                Social Media Team &amp; Photographer
+              </p>
+            </div>
+
+            <!-- Bullet Points Body -->
+            <div class="p-5 sm:p-6">
+              <ul class="space-y-2.5 font-sans text-sm sm:text-[15px] text-ink leading-relaxed list-disc pl-5">
+                <li>Managed social media content and supported digital communication activities for the faculty.</li>
+                <li>Captured photos for official events, seminars, and graduation ceremonies.</li>
+                <li>Assisted in event documentation and produced visual content for publication.</li>
+                <li>Collaborated with faculty staff to support media coverage and daily administrative activities.</li>
+              </ul>
+
+              <div class="mt-5 pt-4 border-t-2 border-dashed border-ink/20 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="font-mono text-[11px] font-bold bg-cream border border-ink px-2 py-0.5 rounded">Event Photography</span>
+                  <span class="font-mono text-[11px] font-bold bg-cream border border-ink px-2 py-0.5 rounded">Social Media</span>
+                  <span class="font-mono text-[11px] font-bold bg-cream border border-ink px-2 py-0.5 rounded">Publication</span>
+                </div>
+
+                <button onclick="openCaseStudy(0)" class="btn-brutal bg-butter hover:bg-lime text-ink font-mono text-xs font-bold px-3.5 py-2 rounded-md inline-flex items-center gap-1.5">
+                  <span>WORK DETAILS</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Taped Polaroid Strip Below Card 1 (Matching Mockup Visuals) -->
+          <div class="grid grid-cols-3 gap-3 sm:gap-4 pt-2 px-1">
+            <!-- Polaroid 1A -->
+            <div class="relative bg-cream p-2 pb-4 border-2 border-ink shadow-brutal -rotate-2">
+              <div class="washi-tape w-10 h-3.5 absolute -top-2 left-1/2 -translate-x-1/2"></div>
+              <div class="aspect-[4/5] bg-sky border border-ink overflow-hidden">
+                <img
+                  src="rector-award-prof-juwari.jpg"
+                  alt="Prof. Juwari menerima Piagam Penghargaan Rector Awards 2025 — FTIRS ITS"
+                  class="w-full h-full object-cover"
+                  style="object-position: 62% 50%;"
+                  onerror="this.onerror=null; this.src='https://placehold.co/320x400/BAE6FD/18181B?text=Rector+Award';"
+                />
+              </div>
+              <p class="font-script text-sm font-bold text-center mt-1">Event Docs</p>
+            </div>
+
+            <!-- Polaroid 1B -->
+            <div class="relative bg-cream p-2 pb-4 border-2 border-ink shadow-brutal rotate-1 translate-y-1">
+              <div class="washi-tape w-10 h-3.5 absolute -top-2 left-1/2 -translate-x-1/2"></div>
+              <div class="aspect-[4/5] bg-lavender border border-ink overflow-hidden">
+                <img
+                  src="prof-priyo-suprobo.jpeg"
+                  alt="Prof. Ir. Priyo Suprobo, M.S., Ph.D. — Ketua MWA ITS 2026–2031"
+                  class="w-full h-full object-cover"
+                  onerror="this.onerror=null; this.src='https://placehold.co/320x400/E9D5FF/18181B?text=Prof.+Priyo+Suprobo';"
+                />
+              </div>
+              <p class="font-script text-sm font-bold text-center mt-1">Social Media</p>
+            </div>
+
+            <!-- Polaroid 1C with Yellow 2026 Badge -->
+            <div class="relative bg-cream p-2 pb-4 border-2 border-ink shadow-brutal -rotate-1">
+              <div class="washi-tape w-10 h-3.5 absolute -top-2 left-1/2 -translate-x-1/2"></div>
+              <span class="absolute -top-3 -right-2 bg-butter border-2 border-ink px-2 py-0.5 font-display font-bold text-xs shadow-brutal-sm z-10">
+                2026
+              </span>
+              <div class="aspect-[4/5] bg-mint border border-ink overflow-hidden">
+                <img
+                  src="clash-of-flavors.jpg"
+                  alt="Clash of Flavors FTIRS vs Sekits — juara kategori Cita Rasa Terbaik"
+                  class="w-full h-full object-cover"
+                  style="object-position: 55% 50%;"
+                  onerror="this.onerror=null; this.src='https://placehold.co/320x400/BBF7D0/18181B?text=Clash+of+Flavors';"
+                />
+              </div>
+              <p class="font-script text-sm font-bold text-center mt-1">FTIRS ITS</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ==================== EXPERIENCE & WORK 2: ANDREWARNA ADVERTISING ==================== -->
+        <article data-category="andrewarna" class="work-card flex flex-col gap-5 lg:mt-6">
+          
+          <!-- Taped Polaroid Strip Above Card 2 (Matching Staggered Mockup Layout) -->
+          <div class="grid grid-cols-3 gap-3 sm:gap-4 px-1">
+            <!-- Polaroid 2A -->
+            <div class="relative bg-cream p-2 pb-4 border-2 border-ink shadow-brutal -rotate-2">
+              <div class="washi-tape w-10 h-3.5 absolute -top-2 left-1/2 -translate-x-1/2"></div>
+              <div class="aspect-[4/5] bg-ink border border-ink overflow-hidden flex items-center justify-center">
+                <img
+                  src="proses-editing-konten-andrewarna.jpg"
+                  alt="Proses editing konten video di CapCut — Andrewarna Advertising"
+                  class="w-full h-full object-contain"
+                  onerror="this.onerror=null; this.src='https://placehold.co/320x400/18181B/18181B?text=Video+Editing';"
+                />
+              </div>
+              <p class="font-script text-sm font-bold text-center mt-1">Editing Video</p>
+            </div>
+
+            <!-- Polaroid 2B -->
+            <div class="relative bg-cream p-2 pb-4 border-2 border-ink shadow-brutal rotate-2 -translate-y-1">
+              <div class="washi-tape w-10 h-3.5 absolute -top-2 left-1/2 -translate-x-1/2"></div>
+              <div class="aspect-[4/5] bg-ink border border-ink overflow-hidden">
+                <img
+                  src="foto-proses-laser-akrilik.jpg"
+                  alt="Proses laser cutting akrilik — Andrewarna Advertising"
+                  class="w-full h-full object-cover"
+                  onerror="this.onerror=null; this.src='https://placehold.co/320x400/18181B/A3E635?text=Laser+Cutting';"
+                />
+              </div>
+              <p class="font-script text-sm font-bold text-center mt-1">Precision Cut</p>
+            </div>
+
+            <!-- Polaroid 2C with Yellow 2026 Badge -->
+            <div class="relative bg-cream p-2 pb-4 border-2 border-ink shadow-brutal -rotate-1">
+              <div class="washi-tape w-10 h-3.5 absolute -top-2 left-1/2 -translate-x-1/2"></div>
+              <span class="absolute -bottom-3 -right-2 bg-butter border-2 border-ink px-2 py-0.5 font-display font-bold text-xs shadow-brutal-sm z-10">
+                2026
+              </span>
+              <div class="aspect-[4/5] bg-butter/70 border border-ink overflow-hidden">
+                <img
+                  src="survey-wahyu.jpg"
+                  alt="Site survey pemasangan signage — Andrewarna Advertising"
+                  class="w-full h-full object-cover"
+                  onerror="this.onerror=null; this.src='https://placehold.co/320x400/FDE68A/18181B?text=Site+Survey';"
+                />
+              </div>
+              <p class="font-script text-sm font-bold text-center mt-1">Production</p>
+            </div>
+          </div>
+
+          <!-- Main Experience Card (Mint Green Header + Cream Body) -->
+          <div class="bg-white border-2 border-ink rounded-xl shadow-brutal-lg overflow-hidden">
+            <!-- Colored Top Header Block -->
+            <div class="bg-mint border-b-2 border-ink p-5 sm:p-6">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <span class="font-mono text-xs font-bold bg-cream border border-ink px-2.5 py-0.5 rounded shadow-brutal-sm">
+                  [July 2026 – October 2026]
+                </span>
+                <span class="font-mono text-xs font-bold uppercase text-ink/80">EXP // 02</span>
+              </div>
+
+              <h3 class="font-display font-bold text-2xl sm:text-3xl leading-tight text-ink">
+                Andrewarna Advertising Surabaya
+              </h3>
+              <p class="font-mono text-xs sm:text-sm font-bold text-ink/90 mt-1.5">
+                Design Team &amp; Cutting Machine Operator
+              </p>
+            </div>
+
+            <!-- Bullet Points Body -->
+            <div class="p-5 sm:p-6">
+              <ul class="space-y-2.5 font-sans text-sm sm:text-[15px] text-ink leading-relaxed list-disc pl-5">
+                <li>Created high-quality visual assets and graphic designs for various advertising materials.</li>
+                <li>Operated and maintained cutting machinery to produce precise advertising components and signage.</li>
+                <li>Edited engaging, short-form video content for promotional and social media purposes.</li>
+                <li>Conducted site surveys for advertising installations to ensure accurate measurements and optimal placement.</li>
+              </ul>
+
+              <div class="mt-5 pt-4 border-t-2 border-dashed border-ink/20 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="font-mono text-[11px] font-bold bg-cream border border-ink px-2 py-0.5 rounded">Advertising Design</span>
+                  <span class="font-mono text-[11px] font-bold bg-cream border border-ink px-2 py-0.5 rounded">Cutting Machine</span>
+                  <span class="font-mono text-[11px] font-bold bg-cream border border-ink px-2 py-0.5 rounded">Short-Form Video</span>
+                </div>
+
+                <button onclick="openCaseStudy(1)" class="btn-brutal bg-lime hover:bg-butter text-ink font-mono text-xs font-bold px-3.5 py-2 rounded-md inline-flex items-center gap-1.5">
+                  <span>WORK DETAILS</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================== 4. SKILLS, SOFT SKILLS, EDUCATION & CERTIFICATIONS ==================== -->
+    <section id="skills-edu" class="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-ink bg-mint">
+      
+      <!-- Column 1: TECHNICAL SKILLS (5 cols) -->
+      <div class="lg:col-span-5 p-6 sm:p-8 lg:p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-ink flex flex-col justify-between">
+        <div>
+          <h2 class="font-display font-bold text-3xl uppercase tracking-tight text-ink mb-6">
+            SKILLS
+          </h2>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3.5">
+            <!-- Adobe Illustrator -->
+            <div class="bg-[#330000] text-[#FF9A00] border-2 border-ink rounded-2xl p-3.5 shadow-brutal flex flex-col items-center justify-center text-center">
+              <span class="font-display font-bold text-2xl mb-1">Ai</span>
+              <span class="font-mono text-[11px] font-bold text-white leading-tight">Adobe Illustrator</span>
+            </div>
+
+            <!-- CorelDRAW -->
+            <div class="bg-[#4ADE80] text-ink border-2 border-ink rounded-2xl p-3.5 shadow-brutal flex flex-col items-center justify-center text-center">
+              <i class="fa-solid fa-pen-nib text-2xl mb-1"></i>
+              <span class="font-mono text-[11px] font-bold leading-tight">CorelDRAW</span>
+            </div>
+
+            <!-- Affinity by Canva -->
+            <div class="bg-[#1E1B4B] text-white border-2 border-ink rounded-2xl p-3.5 shadow-brutal flex flex-col items-center justify-center text-center">
+              <img
+                src="logo-affinity.png"
+                alt="Affinity by Canva"
+                class="w-8 h-8 mb-1 rounded-[7px] object-contain"
+                onerror="this.style.display='none'"
+              />
+              <span class="font-mono text-[11px] font-bold leading-tight">Affinity by Canva</span>
+            </div>
+
+            <!-- Canva -->
+            <div class="bg-[#06B6D4] text-white border-2 border-ink rounded-2xl p-3.5 shadow-brutal flex flex-col items-center justify-center text-center">
+              <span class="font-script font-bold text-3xl leading-none mb-1">Canva</span>
+              <span class="font-mono text-[11px] font-bold leading-tight">Canva</span>
+            </div>
+
+            <!-- Figma -->
+            <div class="bg-[#18181B] text-white border-2 border-ink rounded-2xl p-3.5 shadow-brutal flex flex-col items-center justify-center text-center">
+              <i class="fa-brands fa-figma text-2xl text-pink mb-1"></i>
+              <span class="font-mono text-[11px] font-bold leading-tight">Figma</span>
+            </div>
+
+            <!-- RDWorks V8 (Cutting Machinery) -->
+            <div class="bg-butter text-ink border-2 border-ink rounded-2xl p-3.5 shadow-brutal flex flex-col items-center justify-center text-center">
+              <div class="flex items-baseline gap-1 mb-1 leading-none" aria-label="RDWorks V8">
+                <span class="font-display font-extrabold text-lg tracking-tighter"><span class="text-[#E11D48]">RD</span>Works</span>
+                <span class="font-mono text-[8px] font-bold bg-[#E11D48] text-white px-1 py-0.5 rounded-sm">V8</span>
+              </div>
+              <span class="font-mono text-[11px] font-bold leading-tight">Cutting Machinery</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Languages Bar -->
+        <div class="mt-6 pt-4 border-t-2 border-ink/20">
+          <p class="font-mono text-xs font-bold uppercase mb-2">LANGUAGES</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-cream border-2 border-ink px-3 py-1 rounded-lg font-mono text-xs font-bold shadow-brutal-sm">
+              🇮🇩 Bahasa Indonesia (Native)
+            </span>
+            <span class="bg-cream border-2 border-ink px-3 py-1 rounded-lg font-mono text-xs font-bold shadow-brutal-sm">
+              🌐 English (Intermediate)
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: SOFT SKILLS (3 cols) -->
+      <div class="lg:col-span-3 p-6 sm:p-8 lg:p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-ink flex flex-col justify-between">
+        <div>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl uppercase tracking-tight text-ink mb-6">
+            SOFT SKILLS
+          </h2>
+
+          <div class="space-y-3.5">
+            <div class="bg-pink text-ink border-2 border-ink rounded-full py-2.5 px-4 text-center font-display font-bold text-sm sm:text-base shadow-brutal">
+              Teamwork
+            </div>
+            <div class="bg-butter text-ink border-2 border-ink rounded-full py-2.5 px-4 text-center font-display font-bold text-sm sm:text-base shadow-brutal">
+              Problem Solving
+            </div>
+            <div class="bg-sky text-ink border-2 border-ink rounded-full py-2.5 px-4 text-center font-display font-bold text-sm sm:text-base shadow-brutal">
+              Adaptability
+            </div>
+            <div class="bg-cream text-ink border-2 border-ink rounded-full py-2.5 px-4 text-center font-display font-bold text-sm sm:text-base shadow-brutal">
+              Flexibility
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 bg-cream border-2 border-ink p-3 rounded-lg shadow-brutal-sm font-mono text-[11px] leading-relaxed">
+          <span class="font-bold block mb-0.5">WORK ETHIC:</span>
+          Enjoy working behind the scenes, fast learner, and dependable in event documentation &amp; production.
+        </div>
+      </div>
+
+      <!-- Column 3: EDUCATION & CERTIFICATIONS (4 cols) -->
+      <div class="lg:col-span-4 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+        <div>
+          <h2 class="font-display font-bold text-3xl uppercase tracking-tight text-ink mb-5">
+            EDUCATION
+          </h2>
+
+          <div class="space-y-4">
+            <!-- SMKN 10 Surabaya -->
+            <div class="bg-cream border-2 border-ink p-3.5 rounded-lg shadow-brutal-sm">
+              <div class="flex items-center justify-between gap-2">
+                <h3 class="font-display font-bold text-lg text-ink">SMKN 10 Surabaya</h3>
+                <span class="font-mono text-[10px] font-bold bg-lime border border-ink px-2 py-0.5 rounded">2024 – Present</span>
+              </div>
+              <p class="font-sans text-xs sm:text-sm font-semibold text-ink/85 mt-0.5">
+                Major: Visual Communication Design (DKV)
+              </p>
+            </div>
+
+            <!-- SMP Negeri 23 Surabaya -->
+            <div class="bg-cream/80 border-2 border-ink p-3 rounded-lg">
+              <div class="flex items-center justify-between gap-2">
+                <h3 class="font-display font-bold text-base text-ink">SMP Negeri 23 Surabaya</h3>
+                <span class="font-mono text-[10px] font-bold bg-white border border-ink px-2 py-0.5 rounded">2021 – 2024</span>
+              </div>
+            </div>
+
+            <!-- SD Negeri Penjaringan Sari II Surabaya -->
+            <div class="bg-cream/80 border-2 border-ink p-3 rounded-lg">
+              <div class="flex items-center justify-between gap-2">
+                <h3 class="font-display font-bold text-base text-ink">SD Negeri Penjaringan Sari II</h3>
+                <span class="font-mono text-[10px] font-bold bg-white border border-ink px-2 py-0.5 rounded">2015 – 2021</span>
+              </div>
+              <p class="font-mono text-[11px] text-ink/70">Surabaya</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Internship Certificates -->
+        <div class="mt-6 pt-4 border-t-2 border-ink/20">
+          <h3 class="font-mono text-xs font-bold uppercase mb-2">COURSES &amp; CERTIFICATIONS (2026)</h3>
+          <ul class="font-mono text-[11px] space-y-1.5 text-ink">
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-certificate text-lavender mt-0.5"></i>
+              <span>Internship Certificate — FTIRS ITS Surabaya (2026)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-certificate text-lavender mt-0.5"></i>
+              <span>Internship Certificate — Andrewarna Advertising (2026)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== 5. FOOTER CTA BANNER ==================== -->
+    <footer id="contact" class="bg-pink/65 p-6 sm:p-10 lg:p-12">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div>
+          <h2 class="font-display font-bold text-3xl sm:text-5xl uppercase leading-none tracking-tight text-ink">
+            LET'S BUILD SOMETHING <br class="hidden sm:inline" />
+            AMAZING TOGETHER!
+          </h2>
+          <p class="font-mono text-xs sm:text-sm text-ink/80 mt-3">
+            Ceasar Riko Priyo Susantio • Surabaya, East Java, Indonesia
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- Instagram Button -->
+          <a href="https://www.instagram.com/softmodification/" target="_blank" rel="noopener noreferrer" class="btn-brutal bg-white hover:bg-butter text-ink font-mono text-xs font-bold px-4 py-3 rounded-lg inline-flex items-center gap-2">
+            <i class="fa-brands fa-instagram text-base"></i>
+            <span>instagram.com/softmodification</span>
+          </a>
+
+          <!-- Email Button -->
+          <a href="mailto:rikopriyo58@gmail.com" class="btn-brutal bg-white hover:bg-sky text-ink font-mono text-xs font-bold px-4 py-3 rounded-lg inline-flex items-center gap-2">
+            <i class="fa-solid fa-envelope"></i>
+            <span>rikopriyo58@gmail.com</span>
+          </a>
+
+          <!-- WhatsApp Direct Button -->
+          <a href="https://wa.me/6289695976479" target="_blank" rel="noopener noreferrer" class="btn-brutal bg-lime hover:bg-butter text-ink font-mono text-xs font-bold px-4 py-3 rounded-lg inline-flex items-center gap-2">
+            <i class="fa-brands fa-whatsapp text-base"></i>
+            <span>089695976479</span>
+          </a>
+
+          <!-- Open CV Button -->
+          <button onclick="openCVModal()" class="btn-brutal bg-lavender text-white hover:bg-ink font-mono text-xs font-bold px-4 py-3 rounded-lg inline-flex items-center gap-2">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>FULL CV ↗</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ==================== MODAL 1: WORK / EXPERIENCE CASE STUDY VIEWER ==================== -->
+  <div id="case-study-modal" class="fixed inset-0 z-50 hidden bg-ink/70 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-cream border-2 border-ink rounded-xl shadow-brutal-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <!-- Modal Top Bar -->
+      <div id="cs-modal-header" class="bg-mint border-b-2 border-ink px-5 py-3.5 flex items-center justify-between sticky top-0 z-10">
+        <span id="cs-modal-tag" class="font-mono text-xs font-bold">EXPERIENCE &amp; WORK DETAILS</span>
+        <button onclick="closeCaseStudy()" class="btn-brutal bg-white w-8 h-8 rounded flex items-center justify-center font-bold text-sm">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 sm:p-8 space-y-5">
+        <div>
+          <span id="cs-modal-period" class="inline-block bg-butter border border-ink px-2.5 py-0.5 rounded font-mono text-xs font-bold mb-2">Period</span>
+          <h3 id="cs-modal-title" class="font-display font-bold text-2xl sm:text-3xl text-ink">Organization Title</h3>
+          <p id="cs-modal-role" class="font-mono text-sm font-bold text-lavender mt-1">Role</p>
+        </div>
+
+        <div class="bg-white border-2 border-ink p-4 rounded-lg shadow-brutal-sm">
+          <h4 class="font-mono text-xs font-bold bg-pink inline-block px-2 py-0.5 border border-ink rounded mb-2">KEY RESPONSIBILITIES &amp; OUTPUTS</h4>
+          <ul id="cs-modal-bullets" class="space-y-2 font-sans text-sm text-ink list-disc pl-5 leading-relaxed"></ul>
+        </div>
+
+        <div class="bg-lime/40 border-2 border-ink p-4 rounded-lg">
+          <h4 class="font-mono text-xs font-bold uppercase mb-1">HIGHLIGHT &amp; IMPACT</h4>
+          <p id="cs-modal-impact" class="font-sans text-sm text-ink leading-relaxed"></p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t-2 border-dashed border-ink/20">
+          <div id="cs-modal-tools" class="flex flex-wrap gap-2"></div>
+          <button onclick="closeCaseStudy()" class="btn-brutal bg-ink text-white font-mono text-xs font-bold px-4 py-2 rounded">
+            CLOSE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 2: INTERACTIVE & PRINTABLE FULL CV ==================== -->
+  <div id="cv-modal" class="fixed inset-0 z-50 hidden bg-ink/70 backdrop-blur-xs flex items-center justify-center p-4">
+    <div id="cv-printable-area" class="bg-white border-2 border-ink rounded-xl shadow-brutal-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+      <!-- Top Controls (Hidden on Print) -->
+      <div class="no-print bg-lavender text-white border-b-2 border-ink px-5 py-3.5 flex items-center justify-between sticky top-0 z-10">
+        <span class="font-mono text-xs font-bold">CURRICULUM VITAE — CEASAR RIKO PRIYO SUSANTIO</span>
+        <div class="flex items-center gap-2">
+          <button onclick="window.print()" class="btn-brutal bg-lime text-ink font-mono text-xs font-bold px-3 py-1.5 rounded flex items-center gap-1.5">
+            <i class="fa-solid fa-print"></i>
+            <span>PRINT / SAVE PDF</span>
+          </button>
+          <button onclick="closeCVModal()" class="btn-brutal bg-white text-ink w-8 h-8 rounded flex items-center justify-center font-bold text-sm">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Complete CV Content matching cv riko (1).docx -->
+      <div class="p-6 sm:p-10 space-y-6 text-ink">
+        <!-- Header with Photo & Contact -->
+        <div class="border-b-2 border-ink pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <img 
+              src="foto-ceasar-riko.jpeg" 
+              alt="Ceasar Riko Priyo Susantio" 
+              class="w-20 h-20 rounded-xl object-cover object-top border-2 border-ink shadow-brutal-sm shrink-0"
+              onerror="this.style.display='none'"
+            />
+            <div>
+              <h2 class="font-display font-bold text-3xl sm:text-4xl uppercase tracking-tight">Ceasar Riko Priyo Susantio</h2>
+              <p class="font-mono text-xs sm:text-sm font-bold text-lavender mt-0.5">Visual Communication Design (DKV) Student • Graphic Designer &amp; Photographer</p>
+            </div>
+          </div>
+          <div class="font-mono text-xs space-y-1 sm:text-right shrink-0">
+            <div>📧 rikopriyo58@gmail.com</div>
+            <div>📱 089695976479</div>
+            <div>📸 @softmodification</div>
+            <div>📍 Surabaya, Indonesia</div>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div>
+          <h3 class="font-mono text-xs font-bold bg-butter border border-ink px-2.5 py-1 rounded inline-block mb-2">SUMMARY</h3>
+          <p class="font-sans text-xs sm:text-sm leading-relaxed text-ink/90">
+            I am a vocational high school student majoring in Visual Communication Design (DKV) with experience in graphic design, photography, and social media management. I adapt quickly to new environments, enjoy working behind the scenes, and am always eager to learn new skills. During my internship, I was trusted to handle event documentation and social media content, which strengthened both my technical and teamwork abilities. I am looking for opportunities to grow professionally while contributing through creativity, responsibility, and dedication.
+          </p>
+        </div>
+
+        <!-- Professional Experiences (Strictly the 2 from 2026) -->
+        <div>
+          <h3 class="font-mono text-xs font-bold bg-mint border border-ink px-2.5 py-1 rounded inline-block mb-3">PROFESSIONAL EXPERIENCES</h3>
+          <div class="space-y-4">
+            <!-- Exp 1 -->
+            <div class="border-l-2 border-ink pl-4">
+              <div class="flex flex-wrap justify-between items-center font-mono text-xs font-bold gap-2">
+                <span>Faculty of Industrial Technology and Systems Engineering ITS Surabaya</span>
+                <span class="bg-cream border border-ink px-2 py-0.5 rounded">February 2026 – April 2026</span>
+              </div>
+              <p class="font-mono text-xs font-bold text-lavender mt-0.5">Social Media Team &amp; Photographer</p>
+              <ul class="font-sans text-xs text-ink/85 list-disc pl-4 mt-1.5 space-y-1 leading-relaxed">
+                <li>Managed social media content and supported digital communication activities for the faculty.</li>
+                <li>Captured photos for official events, seminars, and graduation ceremonies.</li>
+                <li>Assisted in event documentation and produced visual content for publication.</li>
+                <li>Collaborated with faculty staff to support media coverage and daily administrative activities.</li>
+              </ul>
+            </div>
+
+            <!-- Exp 2 -->
+            <div class="border-l-2 border-ink pl-4">
+              <div class="flex flex-wrap justify-between items-center font-mono text-xs font-bold gap-2">
+                <span>Andrewarna Advertising Surabaya</span>
+                <span class="bg-cream border border-ink px-2 py-0.5 rounded">July 2026 – October 2026</span>
+              </div>
+              <p class="font-mono text-xs font-bold text-lavender mt-0.5">Design Team &amp; Cutting Machine Operator</p>
+              <ul class="font-sans text-xs text-ink/85 list-disc pl-4 mt-1.5 space-y-1 leading-relaxed">
+                <li>Created high-quality visual assets and graphic designs for various advertising materials.</li>
+                <li>Operated and maintained cutting machinery to produce precise advertising components and signage.</li>
+                <li>Edited engaging, short-form video content for promotional and social media purposes.</li>
+                <li>Conducted site surveys for advertising installations to ensure accurate measurements and optimal placement.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education & Skills Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+          <div>
+            <h3 class="font-mono text-xs font-bold bg-sky border border-ink px-2.5 py-1 rounded inline-block mb-2">EDUCATION</h3>
+            <ul class="font-sans text-xs space-y-2 text-ink/90">
+              <li>
+                <strong>SMKN 10 Surabaya</strong> (2024 – Present)<br/>
+                Major: Visual Communication Design (DKV)
+              </li>
+              <li>
+                <strong>SMP Negeri 23 Surabaya</strong> (2021 – 2024)
+              </li>
+              <li>
+                <strong>SD Negeri Penjaringan Sari II Surabaya</strong> (2015 – 2021)
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-mono text-xs font-bold bg-lime border border-ink px-2.5 py-1 rounded inline-block mb-2">SKILLS &amp; CERTIFICATIONS</h3>
+            <p class="font-sans text-xs leading-relaxed text-ink/90 mb-2">
+              <strong>Technical:</strong> Adobe Illustrator, CorelDRAW, Affinity by Canva, Canva, Figma, Cutting Machinery Operation, Photography.<br/>
+              <strong>Soft Skills:</strong> Teamwork, Problem Solving, Adaptability, Flexibility.<br/>
+              <strong>Languages:</strong> Bahasa Indonesia (Native), English (Intermediate).
+            </p>
+            <p class="font-mono text-[11px] text-ink/80">
+              <strong>Certificates (2026):</strong> Internship Certificate – FTIRS ITS (2026) &amp; Andrewarna Advertising (2026).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST NOTIFICATION BOX (No alert()) ==================== -->
+  <div id="toast-box" class="fixed bottom-5 right-5 z-50 hidden bg-ink text-cream border-2 border-lime px-4 py-3 rounded-lg shadow-brutal font-mono text-xs flex items-center gap-2.5">
+    <span class="w-2.5 h-2.5 rounded-full bg-lime"></span>
+    <span id="toast-message">Copied to clipboard!</span>
+  </div>
+
+  <!-- ==================== INTERACTIVE JAVASCRIPT ==================== -->
+  <script>
+    // Detailed Data for the 2 Experiences/Works
+    const workDetails = [
+      {
+        tag: "EXPERIENCE // 01 — FTIRS ITS SURABAYA",
+        period: "February 2026 – April 2026",
+        title: "Faculty of Industrial Technology and Systems Engineering ITS Surabaya",
+        role: "Social Media Team & Photographer",
+        bullets: [
+          "Managed social media content and supported digital communication activities for the faculty.",
+          "Captured photos for official events, seminars, and graduation ceremonies.",
+          "Assisted in event documentation and produced visual content for publication.",
+          "Collaborated with faculty staff to support media coverage and daily administrative activities."
+        ],
+        impact: "Delivered consistent official event photography and curated social media visuals that supported faculty-wide academic publications and public communications.",
+        tools: ["Event Photography", "Social Media Content", "Canva", "Adobe Illustrator", "Documentation"]
+      },
+      {
+        tag: "EXPERIENCE // 02 — ANDREWARNA ADVERTISING",
+        period: "July 2026 – October 2026",
+        title: "Andrewarna Advertising Surabaya",
+        role: "Design Team & Cutting Machine Operator",
+        bullets: [
+          "Created high-quality visual assets and graphic designs for various advertising materials.",
+          "Operated and maintained cutting machinery to produce precise advertising components and signage.",
+          "Edited engaging, short-form video content for promotional and social media purposes.",
+          "Conducted site surveys for advertising installations to ensure accurate measurements and optimal placement."
+        ],
+        impact: "Bridged digital graphic design with hands-on workshop production—ensuring accurate site measurements, clean vector cut files, and engaging promotional reels.",
+        tools: ["CorelDRAW", "Adobe Illustrator", "Cutting Machine", "Short-Form Video", "Site Survey"]
+      }
+    ];
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileNav.classList.toggle('hidden');
+    });
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => mobileNav.classList.add('hidden'));
+    });
+
+    // Work / Experience Category Filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const workCards = document.querySelectorAll('.work-card');
+
+    function filterWorks(category) {
+      filterButtons.forEach(btn => {
+        if (btn.dataset.filter === category) {
+          btn.classList.remove('bg-white', 'text-ink');
+          btn.classList.add('bg-ink', 'text-white');
+        } else {
+          btn.classList.remove('bg-ink', 'text-white');
+          btn.classList.add('bg-white', 'text-ink');
+        }
+      });
+
+      workCards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => filterWorks(btn.dataset.filter));
+    });
+
+    function filterAndScroll(category) {
+      filterWorks(category);
+      document.getElementById('featured-works').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Work Details Modal Logic
+    const csModal = document.getElementById('case-study-modal');
+    function openCaseStudy(index) {
+      const item = workDetails[index];
+      if (!item) return;
+
+      document.getElementById('cs-modal-tag').textContent = item.tag;
+      document.getElementById('cs-modal-period').textContent = item.period;
+      document.getElementById('cs-modal-title').textContent = item.title;
+      document.getElementById('cs-modal-role').textContent = item.role;
+      document.getElementById('cs-modal-impact').textContent = item.impact;
+
+      document.getElementById('cs-modal-bullets').innerHTML = item.bullets
+        .map(b => `<li>${b}</li>`)
+        .join('');
+
+      document.getElementById('cs-modal-tools').innerHTML = item.tools
+        .map(t => `<span class="font-mono text-[11px] font-bold bg-white border border-ink px-2.5 py-1 rounded">${t}</span>`)
+        .join('');
+
+      csModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCaseStudy() {
+      csModal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // CV Modal Logic
+    const cvModal = document.getElementById('cv-modal');
+    function openCVModal() {
+      cvModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCVModal() {
+      cvModal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // Download Standalone Printable CV File
+    function downloadCVFile() {
+      const cvContent = document.getElementById('cv-printable-area').innerHTML;
+      const htmlDoc = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CV - Ceasar Riko Priyo Susantio</title>
+<script src="https://cdn.tailwindcss.com"><\/script>
+<style>.no-print{display:none!important;} body{font-family:sans-serif;padding:24px;max-width:820px;margin:auto;}</style>
+</head>
+<body>${cvContent}</body>
+</html>`;
+      const blob = new Blob([htmlDoc], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'CV_Ceasar_Riko_Priyo_Susantio.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('CV file downloaded!');
+    }
+
+    // Close Modals on Backdrop Click or Escape
+    [csModal, cvModal].forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeCaseStudy();
+        closeCVModal();
+      }
+    });
+
+    // Toast Notification Helper
+    let toastTimeout;
+    function showToast(msg) {
+      const toast = document.getElementById('toast-box');
+      document.getElementById('toast-message').textContent = msg;
+      toast.classList.remove('hidden');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
+
+    // Copy Text Helper
+    function copyText(text, label) {
+      const tempInput = document.createElement('input');
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        showToast(`${label} copied: ${text}`);
+      } catch (err) {
+        showToast(`${label}: ${text}`);
+      }
+      document.body.removeChild(tempInput);
+    }
+  </script>
+</body>
+</html>
