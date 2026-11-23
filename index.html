@@ -259,6 +259,101 @@
       max-width: none;
     }
 
+    /* ==================== Custom cursor (desktop / fine pointer) ==================== */
+    @media (hover: hover) and (pointer: fine) {
+      html.has-custom-cursor,
+      html.has-custom-cursor * {
+        cursor: none !important;
+      }
+    }
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      width: 20px;
+      height: 20px;
+      background-color: transparent;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M2 8V2h6M16 2h6v6M22 16v6h-6M8 22H2v-6' stroke='%2318181B' stroke-width='3'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      transition:
+        opacity 0.18s ease,
+        width 0.18s ease,
+        height 0.18s ease,
+        background-color 0.18s ease;
+    }
+    .cursor-ring::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 3px;
+      height: 3px;
+      margin: -1.5px 0 0 -1.5px;
+      background: #B8F256;
+      border: 1px solid #18181B;
+    }
+    .cursor-ring.is-hover {
+      width: 28px;
+      height: 28px;
+      background-color: rgba(184, 242, 86, 0.9);
+    }
+    .cursor-ring.is-down {
+      width: 14px;
+      height: 14px;
+      background-color: rgba(253, 224, 71, 0.95);
+    }
+    .cursor-label {
+      position: absolute;
+      left: 100%;
+      top: -10px;
+      margin-left: 6px;
+      padding: 1px 5px;
+      background: #18181B;
+      border: 2px solid #18181B;
+      border-radius: 2px;
+      box-shadow: 2px 2px 0 0 #B8F256;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #B8F256;
+      white-space: nowrap;
+      opacity: 0;
+      translate: 0 4px;
+      transition: opacity 0.16s ease, translate 0.16s ease;
+    }
+    .cursor-ring.has-label .cursor-label {
+      opacity: 1;
+      translate: 0 0;
+    }
+    .cursor-ring.label-left .cursor-label {
+      left: auto;
+      right: 100%;
+      margin-left: 0;
+      margin-right: 6px;
+    }
+
+    /* ==================== School Project cards: tilt + image zoom ==================== */
+    #school-works article {
+      --rx: 0deg;
+      --ry: 0deg;
+      --card-lift: 0px;
+      transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--card-lift));
+    }
+    #school-works article:hover {
+      --card-lift: -4px;
+    }
+    #school-works article img {
+      transition: scale 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    #school-works article:hover img {
+      scale: 1.05;
+    }
+
     /* Print Styles for CV Modal */
     @media print {
       body * {
@@ -1433,6 +1528,11 @@
     <span id="toast-message">Copied to clipboard!</span>
   </div>
 
+  <!-- Custom cursor (desktop only) -->
+  <div id="cursor-ring" class="cursor-ring" aria-hidden="true">
+    <span id="cursor-label" class="cursor-label"></span>
+  </div>
+
   <!-- ==================== INTERACTIVE JAVASCRIPT ==================== -->
   <script>
     // Detailed Data for the 2 Experiences/Works
@@ -1674,6 +1774,84 @@
       }, { passive: true });
       window.addEventListener('resize', revealPassed);
       revealPassed();
+    })();
+
+    // Custom cursor (desktop / fine pointer only)
+    (function initCustomCursor() {
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (!finePointer) return;
+
+      const ring = document.getElementById('cursor-ring');
+      const label = document.getElementById('cursor-label');
+      if (!ring || !label) return;
+
+      const interactiveSelector = 'a, button, [role="button"], #school-works article, .work-card, #pm-img-wrap';
+
+      let visible = false;
+      let enabled = false;
+
+      function labelFor(el) {
+        if (el.closest('#pm-img-wrap')) return 'ZOOM';
+        if (el.closest('#school-works article')) return 'OPEN';
+        if (el.closest('.work-card')) return 'DETAILS';
+        if (el.closest('a')) return 'OPEN';
+        return '';
+      }
+
+      function setVisible(state) {
+        visible = state;
+        ring.style.opacity = state ? '1' : '0';
+      }
+
+      document.addEventListener('mousemove', (e) => {
+        ring.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+        ring.classList.toggle('label-left', e.clientX > window.innerWidth - 110);
+        if (!enabled) {
+          enabled = true;
+          document.documentElement.classList.add('has-custom-cursor');
+        }
+        if (!visible) setVisible(true);
+      }, { passive: true });
+
+      document.addEventListener('mouseleave', () => setVisible(false));
+      document.addEventListener('mouseenter', () => setVisible(true));
+      document.addEventListener('mousedown', () => ring.classList.add('is-down'));
+      document.addEventListener('mouseup', () => ring.classList.remove('is-down'));
+
+      document.addEventListener('mouseover', (e) => {
+        const target = e.target.closest(interactiveSelector);
+        if (!target) {
+          ring.classList.remove('is-hover', 'has-label');
+          label.textContent = '';
+          return;
+        }
+        ring.classList.add('is-hover');
+        const text = labelFor(target);
+        label.textContent = text;
+        ring.classList.toggle('has-label', Boolean(text));
+      });
+    })();
+
+    // School Project cards: subtle 3D tilt following the pointer
+    (function initCardTilt() {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      document.querySelectorAll('#school-works article').forEach(card => {
+        card.addEventListener('pointermove', (e) => {
+          if (e.pointerType !== 'mouse') return;
+          const rect = card.getBoundingClientRect();
+          const px = (e.clientX - rect.left) / rect.width - 0.5;
+          const py = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.setProperty('--rx', `${(-py * 3.5).toFixed(2)}deg`);
+          card.style.setProperty('--ry', `${(px * 3.5).toFixed(2)}deg`);
+        });
+
+        card.addEventListener('pointerleave', () => {
+          card.style.setProperty('--rx', '0deg');
+          card.style.setProperty('--ry', '0deg');
+        });
+      });
     })();
 
     // Mobile Menu Toggle
