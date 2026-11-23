@@ -1,13 +1,16 @@
 # Ceasar Riko — Portfolio
 
+[![Live site](https://img.shields.io/badge/live-rikopriyo.github.io%2Fportofolio--riko--priyo-B8F256?style=flat-square)](https://rikopriyo.github.io/portofolio-riko-priyo/)
+
 Personal portfolio of **Ceasar Riko Priyo Susantio**, a Visual Communication Design (DKV) student based in Surabaya, Indonesia — graphic designer, photographer, and content editor.
 
 Neo-brutalist single-page site with a retro desktop / collage aesthetic: taped polaroid strips, floating OS folders, case-study modals, and an interactive CV.
 
 ## Live site
 
-> **Belum deploy.** Setelah aktifkan GitHub Pages, ganti baris ini dengan URL-nya,
-> contoh: `https://username.github.io/portofolio-riko-priyo/`
+**https://rikopriyo.github.io/portofolio-riko-priyo/**
+
+Hosted with GitHub Pages (branch `main`, folder `/ (root)`).
 
 ## Upload checklist (GitHub web, tanpa Git)
 
@@ -51,6 +54,25 @@ portofolio-riko-priyo/
 ├── logo-affinity.png                   # Affinity by Canva skill icon
 └── README.md
 ```
+
+## School project photos
+
+The **School Projects** section (between Featured Works and Skills) has 7 cards. Each card loads an image from this folder:
+
+| Card | File name |
+|---|---|
+| Figma Project | `tugas-figma.jpg` |
+| Photography | `fotografi.jpg` |
+| After Effects Project | `tugas-after-effects.jpg` |
+| Desain Baju | `tugas-baju.jpg` |
+| 3D Project | `tugas-3d.jpg` |
+| Nirmana Project | `nirmana-buaya.jpg` |
+| Graphic Design | `kira-jojo.jpg` |
+| Graphic Design #2 | `rock-design.jpg` |
+| Graphic Design #3 | `raichu-design.jpg` |
+| Graphic Design #4 | `yveltal-design.jpg` |
+
+If a file is missing, the card falls back to a colored icon tile. Images are cropped to a 4:3 frame (`object-cover`).
 
 ## Run locally
 
