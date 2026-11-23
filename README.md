@@ -2,7 +2,7 @@
 
 [![Live site](https://img.shields.io/badge/live-rikopriyo.github.io%2Fportofolio--riko--priyo-B8F256?style=flat-square)](https://rikopriyo.github.io/portofolio-riko-priyo/)
 
-Personal portfolio of **Ceasar Riko Priyo Susantio**, a Visual Communication Design (DKV) student based in Surabaya, Indonesia — graphic designer, photographer, and content editor.
+Personal portfolio of **Ceasar Riko Priyo Susantio**, a Visual Communication Design (DKV) student based in Surabaya, Indonesia — graphic designer and content editor.
 
 Neo-brutalist single-page site with a retro desktop / collage aesthetic: taped polaroid strips, floating OS folders, case-study modals, and an interactive CV.
 
@@ -26,6 +26,8 @@ Hosted with GitHub Pages (branch `main`, folder `/ (root)`).
 - Sticky brutalist navbar with smooth-scroll sections
 - Filterable "Featured Works" cards (FTIRS ITS & Andrewarna Advertising)
 - Case-study modal with per-project details, impact, and tools
+- School Projects grid with click-to-open detail modal, zoomable photos, and arrow-key navigation
+- Scroll-reveal, card press, and modal pop-in animations (respects `prefers-reduced-motion`)
 - Interactive CV modal + print / save-as-PDF support
 - Fully responsive (mobile → desktop)
 - Photo fallbacks via `onerror` so layout never breaks if an image is missing
@@ -57,7 +59,7 @@ portofolio-riko-priyo/
 
 ## School project photos
 
-The **School Projects** section (between Featured Works and Skills) has 7 cards. Each card loads an image from this folder:
+The **School Projects** section (between Featured Works and Skills) has 10 cards. Each card loads an image from this folder:
 
 | Card | File name |
 |---|---|
@@ -67,12 +69,14 @@ The **School Projects** section (between Featured Works and Skills) has 7 cards.
 | Desain Baju | `tugas-baju.jpg` |
 | 3D Project | `tugas-3d.jpg` |
 | Nirmana Project | `nirmana-buaya.jpg` |
-| Graphic Design | `kira-jojo.jpg` |
-| Graphic Design #2 | `rock-design.jpg` |
-| Graphic Design #3 | `raichu-design.jpg` |
-| Graphic Design #4 | `yveltal-design.jpg` |
+| Graphic Design — Kira Jojo | `kira-jojo.jpg` |
+| Graphic Design — Rock | `rock-design.jpg` |
+| Graphic Design — Raichu | `raichu-design.jpg` |
+| Graphic Design — Yveltal | `yveltal-design.jpg` |
 
-If a file is missing, the card falls back to a colored icon tile. Images are cropped to a 4:3 frame (`object-cover`).
+Click (or Tab + Enter) any card to open a detail modal with a short description, tool chips, and prev/next navigation. Click the photo inside the modal to zoom 200%, and press `Esc` to close.
+
+If a file is missing, the card falls back to a colored icon tile. Images are cropped to a 4:3 frame (`object-cover`), except poster and wide-strip images which use `object-contain`.
 
 ## Run locally
 

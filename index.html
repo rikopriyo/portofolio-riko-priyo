@@ -3,7 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CEASAR RIKO — DKV Creative & Photographer</title>
+  <title>CEASAR RIKO — DKV Creative</title>
+  <meta name="description" content="Portfolio of Ceasar Riko Priyo Susantio — a Visual Communication Design (DKV) student at SMKN 10 Surabaya working in graphic design, photography, and motion graphics." />
+  <meta name="author" content="Ceasar Riko Priyo Susantio" />
+  <meta name="theme-color" content="#B8F256" />
+  <link rel="canonical" href="https://rikopriyo.github.io/portofolio-riko-priyo/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23B8F256'/%3E%3Crect x='4' y='4' width='56' height='56' rx='7' fill='none' stroke='%2318181B' stroke-width='4'/%3E%3Ctext x='32' y='45' font-family='Arial Black,Arial,sans-serif' font-size='34' font-weight='900' text-anchor='middle' fill='%2318181B'%3ER%3C/text%3E%3C/svg%3E" />
+  <!-- Social sharing preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ceasar Riko — DKV Creative" />
+  <meta property="og:description" content="DKV student at SMKN 10 Surabaya — graphic design, photography, motion graphics, and 3D work." />
+  <meta property="og:url" content="https://rikopriyo.github.io/portofolio-riko-priyo/" />
+  <meta property="og:image" content="https://rikopriyo.github.io/portofolio-riko-priyo/foto-ceasar-riko.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ceasar Riko — DKV Creative" />
+  <meta name="twitter:description" content="DKV student at SMKN 10 Surabaya — graphic design, photography, motion graphics, and 3D work." />
+  <meta name="twitter:image" content="https://rikopriyo.github.io/portofolio-riko-priyo/foto-ceasar-riko.jpeg" />
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Space Grotesk, Plus Jakarta Sans, JetBrains Mono, Caveat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -110,6 +125,138 @@
     ::-webkit-scrollbar-thumb {
       background: #8B7CFF;
       border: 2px solid #18181B;
+    }
+
+    /* ==================== Motion: scroll reveal + click feedback ==================== */
+    .reveal {
+      opacity: 0;
+      translate: 0 24px;
+      transition:
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        translate 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      translate: 0 0;
+    }
+
+    /* Project cards press down when clicked */
+    #school-works article {
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        scale 0.12s ease,
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        translate 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    #school-works article:active {
+      scale: 0.985;
+    }
+
+    /* Skill tiles lift slightly on hover */
+    #skills-edu .rounded-2xl {
+      transition:
+        opacity 0.45s ease,
+        translate 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+    #skills-edu .rounded-2xl.reveal {
+      translate: 0 0;
+    }
+    #skills-edu .rounded-2xl:hover {
+      translate: 0 -3px;
+      box-shadow: 6px 6px 0px 0px #18181B;
+    }
+
+    /* Modal pop-in when opened */
+    @keyframes modal-fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes modal-pop {
+      from { opacity: 0; scale: 0.96; translate: 0 12px; }
+      to { opacity: 1; scale: 1; translate: 0 0; }
+    }
+    #project-modal:not(.hidden),
+    #case-study-modal:not(.hidden),
+    #cv-modal:not(.hidden) {
+      animation: modal-fade 0.2s ease-out both;
+    }
+    #project-modal:not(.hidden) > div,
+    #case-study-modal:not(.hidden) > div,
+    #cv-modal:not(.hidden) > div {
+      animation: modal-pop 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+    }
+
+    /* Hero intro on page load */
+    @keyframes rise-in {
+      from { opacity: 0; translate: 0 26px; }
+      to { opacity: 1; translate: 0 0; }
+    }
+    #about h1 {
+      animation: rise-in 0.6s 0.05s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    #about h1 + p {
+      animation: rise-in 0.6s 0.14s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    /* Respect reduced-motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal,
+      #about h1,
+      #about h1 + p,
+      #project-modal:not(.hidden),
+      #case-study-modal:not(.hidden),
+      #cv-modal:not(.hidden),
+      #project-modal:not(.hidden) > div,
+      #case-study-modal:not(.hidden) > div,
+      #cv-modal:not(.hidden) > div {
+        animation: none !important;
+        opacity: 1 !important;
+        translate: none !important;
+        scale: none !important;
+        transition: none !important;
+      }
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    /* School Project Card Zoom Hint */
+    #school-works article > div:first-child::after {
+      content: "⤢ ZOOM";
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      z-index: 2;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #18181B;
+      background: #FFFFFF;
+      border: 2px solid #18181B;
+      border-radius: 4px;
+      padding: 2px 6px;
+      box-shadow: 2px 2px 0 0 #18181B;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      pointer-events: none;
+    }
+    #school-works article:hover > div:first-child::after,
+    #school-works article:focus-visible > div:first-child::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Project Modal: click image to zoom in / out */
+    #pm-img-wrap.zoomed {
+      cursor: zoom-out;
+    }
+    #pm-img-wrap.zoomed #pm-img {
+      width: 200%;
+      max-width: none;
     }
 
     /* Print Styles for CV Modal */
@@ -267,11 +414,11 @@
           </div>
 
           <!-- Display Heading -->
-          <h1 class="font-display font-bold text-5xl sm:text-6xl xl:text-7xl leading-[0.95] tracking-tight uppercase text-ink">
-            CEASAR RIKO
+          <h1 class="font-display font-bold text-4xl sm:text-5xl xl:text-6xl leading-[0.95] tracking-tight uppercase text-ink break-words">
+            CEASAR RIKO PRIYO SUSANTIO
           </h1>
           <p class="font-display font-bold text-lg sm:text-2xl uppercase tracking-wide text-ink mt-1.5 mb-6">
-            DKV CREATIVE &amp; PHOTOGRAPHER
+            DKV CREATIVE
           </p>
 
           <!-- Yellow OS Window Card: ABOUT ME -->
@@ -426,6 +573,7 @@
                 <img
                   src="rector-award-prof-juwari.jpg"
                   alt="Prof. Juwari menerima Piagam Penghargaan Rector Awards 2025 — FTIRS ITS"
+                  loading="lazy" decoding="async"
                   class="w-full h-full object-cover"
                   style="object-position: 62% 50%;"
                   onerror="this.onerror=null; this.src='https://placehold.co/320x400/BAE6FD/18181B?text=Rector+Award';"
@@ -441,6 +589,7 @@
                 <img
                   src="prof-priyo-suprobo.jpeg"
                   alt="Prof. Ir. Priyo Suprobo, M.S., Ph.D. — Ketua MWA ITS 2026–2031"
+                  loading="lazy" decoding="async"
                   class="w-full h-full object-cover"
                   onerror="this.onerror=null; this.src='https://placehold.co/320x400/E9D5FF/18181B?text=Prof.+Priyo+Suprobo';"
                 />
@@ -458,6 +607,7 @@
                 <img
                   src="clash-of-flavors.jpg"
                   alt="Clash of Flavors FTIRS vs Sekits — juara kategori Cita Rasa Terbaik"
+                  loading="lazy" decoding="async"
                   class="w-full h-full object-cover"
                   style="object-position: 55% 50%;"
                   onerror="this.onerror=null; this.src='https://placehold.co/320x400/BBF7D0/18181B?text=Clash+of+Flavors';"
@@ -480,6 +630,7 @@
                 <img
                   src="proses-editing-konten-andrewarna.jpg"
                   alt="Proses editing konten video di CapCut — Andrewarna Advertising"
+                  loading="lazy" decoding="async"
                   class="w-full h-full object-contain"
                   onerror="this.onerror=null; this.src='https://placehold.co/320x400/18181B/18181B?text=Video+Editing';"
                 />
@@ -494,6 +645,7 @@
                 <img
                   src="foto-proses-laser-akrilik.jpg"
                   alt="Proses laser cutting akrilik — Andrewarna Advertising"
+                  loading="lazy" decoding="async"
                   class="w-full h-full object-cover"
                   onerror="this.onerror=null; this.src='https://placehold.co/320x400/18181B/A3E635?text=Laser+Cutting';"
                 />
@@ -511,6 +663,7 @@
                 <img
                   src="survey-wahyu.jpg"
                   alt="Site survey pemasangan signage — Andrewarna Advertising"
+                  loading="lazy" decoding="async"
                   class="w-full h-full object-cover"
                   onerror="this.onerror=null; this.src='https://placehold.co/320x400/FDE68A/18181B?text=Site+Survey';"
                 />
@@ -581,6 +734,7 @@
           </h2>
           <p class="font-mono text-xs sm:text-sm font-semibold text-ink/70 mt-2 max-w-xl">
             Coursework collection — interface design, photography, motion graphics, apparel, 3D, nirmana, and poster design.
+            <span class="block mt-1 text-ink/50">Click a card to view details and zoom the photo.</span>
           </p>
         </div>
         <span class="font-mono text-xs font-bold bg-white border-2 border-ink px-3 py-1.5 rounded shadow-brutal-sm self-start md:self-auto shrink-0">
@@ -597,13 +751,13 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
 
         <!-- 01 — Figma -->
-        <article class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col">
+        <article onclick="openProject(0)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-ink border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
               <i class="fa-brands fa-figma text-3xl mb-1"></i>
               <span class="font-mono text-[9px] font-bold">UI / UX</span>
             </div>
-            <img src="tugas-figma.jpg" alt="Tugas Figma — UI/UX prototype"
+            <img src="tugas-figma.jpg" alt="Tugas Figma — UI/UX prototype" loading="lazy" decoding="async"
                  class="relative w-full h-full object-contain" onerror="this.remove()" />
           </div>
           <div class="p-4 flex flex-col gap-2 flex-1">
@@ -622,13 +776,13 @@
         </article>
 
         <!-- 02 — Photography -->
-        <article class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col">
+        <article onclick="openProject(1)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-pink/40 border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-camera-retro text-3xl mb-1"></i>
               <span class="font-mono text-[9px] font-bold">PHOTO SERIES</span>
             </div>
-            <img src="fotografi.jpg" alt="Tugas fotografi — photo series"
+            <img src="fotografi.jpg" alt="Tugas fotografi — photo series" loading="lazy" decoding="async"
                  class="relative w-full h-full object-cover" onerror="this.remove()" />
           </div>
           <div class="p-4 flex flex-col gap-2 flex-1">
@@ -647,13 +801,13 @@
         </article>
 
         <!-- 03 — After Effects -->
-        <article class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col">
+        <article onclick="openProject(2)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-[#1E1B4B] border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-[#C4B5FD]">
               <span class="font-display font-bold text-3xl mb-1">Ae</span>
               <span class="font-mono text-[9px] font-bold">MOTION</span>
             </div>
-            <img src="tugas-after-effects.jpg" alt="Tugas After Effects — motion graphics"
+            <img src="tugas-after-effects.jpg" alt="Tugas After Effects — motion graphics" loading="lazy" decoding="async"
                  class="relative w-full h-full object-cover" onerror="this.remove()" />
           </div>
           <div class="p-4 flex flex-col gap-2 flex-1">
@@ -672,13 +826,13 @@
         </article>
 
         <!-- 04 — Desain Baju -->
-        <article class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col">
+        <article onclick="openProject(3)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-butter border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-shirt text-3xl mb-1"></i>
               <span class="font-mono text-[9px] font-bold">APPAREL</span>
             </div>
-            <img src="tugas-baju.jpg" alt="Tugas desain baju — apparel mockup"
+            <img src="tugas-baju.jpg" alt="Tugas desain baju — apparel mockup" loading="lazy" decoding="async"
                  class="relative w-full h-full object-cover" onerror="this.remove()" />
           </div>
           <div class="p-4 flex flex-col gap-2 flex-1">
@@ -697,13 +851,13 @@
         </article>
 
         <!-- 05 — 3D Project -->
-        <article class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col">
+        <article onclick="openProject(4)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-mint border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-cube text-3xl mb-1"></i>
               <span class="font-mono text-[9px] font-bold">3D</span>
             </div>
-            <img src="tugas-3d.jpg" alt="Tugas 3D — object modeling and render"
+            <img src="tugas-3d.jpg" alt="Tugas 3D — object modeling and render" loading="lazy" decoding="async"
                  class="relative w-full h-full object-cover" onerror="this.remove()" />
           </div>
           <div class="p-4 flex flex-col gap-2 flex-1">
@@ -722,13 +876,13 @@
         </article>
 
         <!-- 06 — Nirmana -->
-        <article class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col">
+        <article onclick="openProject(5)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-lavender border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
               <i class="fa-solid fa-shapes text-3xl mb-1"></i>
               <span class="font-mono text-[9px] font-bold">BASIC DESIGN</span>
             </div>
-            <img src="nirmana-buaya.jpg" alt="Tugas nirmana — basic design composition"
+            <img src="nirmana-buaya.jpg" alt="Tugas nirmana — basic design composition" loading="lazy" decoding="async"
                  class="relative w-full h-full object-cover" onerror="this.remove()" />
           </div>
           <div class="p-4 flex flex-col gap-2 flex-1">
@@ -747,13 +901,13 @@
         </article>
 
         <!-- 07 — Graphic Design (Pinterest-inspired) -->
-        <article class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col">
+        <article onclick="openProject(6)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-cream border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-palette text-3xl mb-1"></i>
               <span class="font-mono text-[9px] font-bold">POSTER / FEED</span>
             </div>
-            <img src="kira-jojo.jpg" alt="Poster Kira Jojo — graphic design inspired by Pinterest"
+            <img src="kira-jojo.jpg" alt="Poster Kira Jojo — graphic design inspired by Pinterest" loading="lazy" decoding="async"
                  class="relative w-full h-full object-contain" onerror="this.remove()" />
           </div>
           <div class="p-4 flex flex-col gap-2 flex-1">
@@ -772,13 +926,13 @@
         </article>
 
         <!-- 08 — Graphic Design (extra slot 1) -->
-        <article class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col">
+        <article onclick="openProject(7)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-cream border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-palette text-3xl mb-1"></i>
               <span class="font-mono text-[9px] font-bold">POSTER / FEED</span>
             </div>
-            <img src="rock-design.jpg" alt="Rock design poster — graphic design"
+            <img src="rock-design.jpg" alt="Rock design poster — graphic design" loading="lazy" decoding="async"
                  class="relative w-full h-full object-contain" onerror="this.remove()" />
           </div>
           <div class="p-4 flex flex-col gap-2 flex-1">
@@ -797,13 +951,13 @@
         </article>
 
         <!-- 09 — Graphic Design (extra slot 2) -->
-        <article class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col">
+        <article onclick="openProject(8)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-cream border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-palette text-3xl mb-1"></i>
               <span class="font-mono text-[9px] font-bold">POSTER / FEED</span>
             </div>
-            <img src="raichu-design.jpg" alt="Raichu design poster — graphic design"
+            <img src="raichu-design.jpg" alt="Raichu design poster — graphic design" loading="lazy" decoding="async"
                  class="relative w-full h-full object-contain" onerror="this.remove()" />
           </div>
           <div class="p-4 flex flex-col gap-2 flex-1">
@@ -822,13 +976,13 @@
         </article>
 
         <!-- 10 — Graphic Design (extra slot 3) -->
-        <article class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col">
+        <article onclick="openProject(9)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-cream border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-palette text-3xl mb-1"></i>
               <span class="font-mono text-[9px] font-bold">POSTER / FEED</span>
             </div>
-            <img src="yveltal-design.jpg" alt="Yveltal design poster — graphic design"
+            <img src="yveltal-design.jpg" alt="Yveltal design poster — graphic design" loading="lazy" decoding="async"
                  class="relative w-full h-full object-contain" onerror="this.remove()" />
           </div>
           <div class="p-4 flex flex-col gap-2 flex-1">
@@ -1118,6 +1272,43 @@
   </div>
 
   <!-- ==================== MODAL 2: INTERACTIVE & PRINTABLE FULL CV ==================== -->
+  <!-- School Project Detail + Zoom Modal -->
+  <div id="project-modal" onclick="if (event.target === this) closeProject()" class="fixed inset-0 z-50 hidden bg-ink/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white border-2 border-ink rounded-xl shadow-brutal-lg w-full max-w-5xl max-h-[94vh] flex flex-col overflow-hidden">
+      <!-- Header -->
+      <div class="bg-ink text-white border-b-2 border-ink px-4 py-3 flex items-center justify-between gap-3 shrink-0">
+        <span id="pm-counter" class="font-mono text-[11px] font-bold truncate"></span>
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="prevProject()" title="Previous project" class="btn-brutal bg-white text-ink w-8 h-8 rounded flex items-center justify-center text-xs">←</button>
+          <button onclick="nextProject()" title="Next project" class="btn-brutal bg-white text-ink w-8 h-8 rounded flex items-center justify-center text-xs">→</button>
+          <button onclick="closeProject()" class="btn-brutal bg-lime text-ink w-8 h-8 rounded flex items-center justify-center font-bold text-sm">✕</button>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="grid grid-cols-1 md:grid-cols-2 overflow-y-auto">
+        <!-- Image: klik untuk zoom in / out -->
+        <div id="pm-img-wrap" onclick="toggleProjectZoom()"
+             class="relative bg-cream border-b-2 md:border-b-0 md:border-r-2 border-ink overflow-auto max-h-[42vh] md:max-h-[78vh] flex items-start justify-center cursor-zoom-in">
+          <img id="pm-img" src="" alt="" class="w-full h-auto" />
+        </div>
+
+        <!-- Info -->
+        <div class="p-5 sm:p-7 flex flex-col gap-3">
+          <div class="flex items-start justify-between gap-3">
+            <h3 id="pm-title" class="font-display font-bold text-2xl sm:text-3xl uppercase leading-tight"></h3>
+            <span id="pm-badge" class="font-mono text-xs font-bold bg-butter border-2 border-ink px-2 py-0.5 rounded shadow-brutal-sm shrink-0"></span>
+          </div>
+          <p id="pm-desc" class="font-sans text-sm leading-relaxed text-ink/80"></p>
+          <div id="pm-tools" class="flex flex-wrap gap-1.5"></div>
+          <p class="font-mono text-[10px] font-bold text-ink/50 mt-auto pt-3 border-t-2 border-dashed border-ink/20">
+            CLICK PHOTO TO ZOOM IN / OUT &nbsp;•&nbsp; SMKN 10 SURABAYA
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="cv-modal" class="fixed inset-0 z-50 hidden bg-ink/70 backdrop-blur-xs flex items-center justify-center p-4">
     <div id="cv-printable-area" class="bg-white border-2 border-ink rounded-xl shadow-brutal-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
       <!-- Top Controls (Hidden on Print) -->
@@ -1147,7 +1338,7 @@
             />
             <div>
               <h2 class="font-display font-bold text-3xl sm:text-4xl uppercase tracking-tight">Ceasar Riko Priyo Susantio</h2>
-              <p class="font-mono text-xs sm:text-sm font-bold text-lavender mt-0.5">Visual Communication Design (DKV) Student • Graphic Designer &amp; Photographer</p>
+              <p class="font-mono text-xs sm:text-sm font-bold text-lavender mt-0.5">Visual Communication Design (DKV) Student • Graphic Designer</p>
             </div>
           </div>
           <div class="font-mono text-xs space-y-1 sm:text-right shrink-0">
@@ -1276,6 +1467,215 @@
       }
     ];
 
+    // Detailed Data for the 10 School Projects (click card to open)
+    const projectDetails = [
+      {
+        title: "Figma Project",
+        badge: "UI / UX",
+        img: "tugas-figma.jpg",
+        alt: "Tugas Figma — UI/UX prototype",
+        desc: "UI/UX coursework built in Figma: wireframes, a reusable component library, and clickable mobile & web flows. Focused on clear hierarchy, consistent spacing, and prototypes that behave like a real product.",
+        tools: ["Figma", "Wireframing", "Prototyping", "Component Library"]
+      },
+      {
+        title: "Photography",
+        badge: "PHOTO SERIES",
+        img: "fotografi.jpg",
+        alt: "Tugas fotografi — photo series",
+        desc: "A photo series covering portrait, product, and event shots. Practiced composition, natural and artificial lighting, and color grading so the whole set keeps one consistent mood.",
+        tools: ["Camera", "Lighting", "Lightroom", "Color Grading"]
+      },
+      {
+        title: "After Effects Project",
+        badge: "MOTION",
+        img: "tugas-after-effects.jpg",
+        alt: "Tugas After Effects — motion graphics",
+        desc: "Motion graphics exercise in After Effects — kinetic typography, animated transitions, and timing synced to audio. Built from layered compositions with simple expressions to keep the motion clean.",
+        tools: ["After Effects", "Kinetic Typography", "Transitions", "Sound Sync"]
+      },
+      {
+        title: "Desain Baju",
+        badge: "APPAREL",
+        img: "tugas-baju.jpg",
+        alt: "Tugas desain baju — apparel mockup",
+        desc: "Apparel design coursework — explored garment silhouettes, typography placement, and print-ready artwork, then presented the final result as a clean garment mockup.",
+        tools: ["Illustrator", "Apparel Design", "Typography", "Mockup"]
+      },
+      {
+        title: "3D Project",
+        badge: "3D",
+        img: "tugas-3d.jpg",
+        alt: "Tugas 3D — object modeling and render",
+        desc: "3D project in Blender — modeled the object from primitives, applied materials, set up three-point lighting, and rendered a final still image.",
+        tools: ["Blender", "Modeling", "Materials", "Render"]
+      },
+      {
+        title: "Nirmana Project",
+        badge: "BASIC DESIGN",
+        img: "nirmana-buaya.jpg",
+        alt: "Tugas nirmana — basic design composition",
+        desc: "Nirmana (basic design) study — an exploration of line, shape, rhythm, and balance with mixed media. The crocodile composition trains sensitivity to negative space, repetition, and visual weight.",
+        tools: ["Manual", "Mixed Media", "Composition", "Rhythm"]
+      },
+      {
+        title: "Kira Jojo — Poster",
+        badge: "POSTER / FEED",
+        img: "kira-jojo.jpg",
+        alt: "Poster Kira Jojo — graphic design inspired by Pinterest",
+        desc: "Character-driven poster inspired by JoJo's Bizarre Adventure and Pinterest poster trends. Bold display type, layered textures, and high contrast push the dramatic mood.",
+        tools: ["Affinity by Canva", "Pinterest", "Typography", "Poster"]
+      },
+      {
+        title: "Rock — Poster",
+        badge: "POSTER / FEED",
+        img: "rock-design.jpg",
+        alt: "Rock design poster — graphic design",
+        desc: "Energetic music poster built around gritty texture, strong type hierarchy, and a bold color palette — designed to read instantly from a distance and on a phone screen.",
+        tools: ["Affinity by Canva", "Pinterest", "Typography", "Poster"]
+      },
+      {
+        title: "Raichu — Poster",
+        badge: "POSTER / FEED",
+        img: "raichu-design.jpg",
+        alt: "Raichu design poster — graphic design",
+        desc: "Playful Pokémon-themed poster using bright color blocking, a dynamic diagonal composition, and clean vector shapes to keep the character as the focal point.",
+        tools: ["Affinity by Canva", "Pinterest", "Color Blocking", "Poster"]
+      },
+      {
+        title: "Yveltal — Poster",
+        badge: "POSTER / FEED",
+        img: "yveltal-design.jpg",
+        alt: "Yveltal design poster — graphic design",
+        desc: "Dark, dramatic Pokémon-themed poster focused on contrast, atmosphere, and layered depth — a moodier counterpoint to the brighter pieces in this series.",
+        tools: ["Affinity by Canva", "Pinterest", "Compositing", "Poster"]
+      }
+    ];
+
+    const projectModal = document.getElementById('project-modal');
+    const pmImg = document.getElementById('pm-img');
+    const pmImgWrap = document.getElementById('pm-img-wrap');
+    let currentProject = 0;
+
+    function renderProject(index) {
+      const item = projectDetails[index];
+      if (!item) return;
+      currentProject = index;
+
+      pmImg.src = item.img;
+      pmImg.alt = item.alt;
+      document.getElementById('pm-counter').textContent =
+        `SCHOOL PROJECT ${String(index + 1).padStart(2, '0')} / ${projectDetails.length} — ${item.badge}`;
+      document.getElementById('pm-title').textContent = item.title;
+      document.getElementById('pm-badge').textContent = item.badge;
+      document.getElementById('pm-desc').textContent = item.desc;
+      document.getElementById('pm-tools').innerHTML = item.tools
+        .map(t => `<span class="font-mono text-[11px] font-bold bg-cream border border-ink px-2 py-0.5 rounded">${t}</span>`)
+        .join('');
+      pmImgWrap.classList.remove('zoomed');
+    }
+
+    function openProject(index) {
+      renderProject(index);
+      projectModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProject() {
+      projectModal.classList.add('hidden');
+      document.body.style.overflow = '';
+      pmImgWrap.classList.remove('zoomed');
+    }
+
+    function nextProject() {
+      renderProject((currentProject + 1) % projectDetails.length);
+    }
+
+    function prevProject() {
+      renderProject((currentProject - 1 + projectDetails.length) % projectDetails.length);
+    }
+
+    function toggleProjectZoom() {
+      pmImgWrap.classList.toggle('zoomed');
+    }
+
+    // Keyboard access: every School Projects card works with Tab + Enter/Space
+    document.querySelectorAll('#school-works article').forEach((card, index) => {
+      const title = card.querySelector('h3')?.textContent.trim() || 'Project';
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', `${title} — open details and zoom`);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openProject(index);
+        }
+      });
+    });
+
+    // Scroll reveal: cards and blocks rise in as they enter the viewport
+    (function initScrollReveal() {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduceMotion || !('IntersectionObserver' in window)) return;
+
+      const groups = [
+        { selector: '#featured-works > div:first-child', step: 0 },
+        { selector: '#school-works > div:first-child', step: 0 },
+        { selector: '.work-card', step: 90 },
+        { selector: '#school-works article', step: 60 },
+        { selector: '#skills-edu h2', step: 0 },
+        { selector: '#skills-edu .rounded-2xl', step: 35 },
+        { selector: '#skills-edu .rounded-full', step: 55 },
+        { selector: '#skills-edu .space-y-4 > div', step: 55 },
+        { selector: '#contact > div', step: 0 }
+      ];
+
+      function showReveal(el) {
+        el.classList.add('is-visible');
+        observer.unobserve(el);
+        // Clear the stagger delay so hover / press transitions stay snappy afterwards
+        window.setTimeout(() => { el.style.transitionDelay = ''; }, 900);
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          // Also reveal anything already scrolled past (e.g. after an anchor jump)
+          if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
+            showReveal(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+      groups.forEach(group => {
+        document.querySelectorAll(group.selector).forEach((el, index) => {
+          el.classList.add('reveal');
+          if (group.step) {
+            el.style.transitionDelay = `${Math.min(index * group.step, 280)}ms`;
+          }
+          observer.observe(el);
+        });
+      });
+
+      // Fallback for fast scrolling and anchor jumps: reveal anything already passed.
+      let ticking = false;
+      function revealPassed() {
+        const trigger = window.innerHeight * 0.92;
+        document.querySelectorAll('.reveal:not(.is-visible)').forEach(el => {
+          if (el.getBoundingClientRect().top < trigger) {
+            showReveal(el);
+          }
+        });
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(revealPassed);
+        }
+      }, { passive: true });
+      window.addEventListener('resize', revealPassed);
+      revealPassed();
+    })();
+
     // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileNav = document.getElementById('mobile-nav');
@@ -1399,6 +1799,11 @@
       if (e.key === 'Escape') {
         closeCaseStudy();
         closeCVModal();
+        closeProject();
+      }
+      if (!projectModal.classList.contains('hidden')) {
+        if (e.key === 'ArrowRight') nextProject();
+        if (e.key === 'ArrowLeft') prevProject();
       }
     });
 
