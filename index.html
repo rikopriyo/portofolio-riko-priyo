@@ -337,6 +337,90 @@
       margin-right: 6px;
     }
 
+    /* ==================== Scroll progress + active nav ==================== */
+    .scroll-progress {
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 3px;
+      background: #B8F256;
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 3px;
+      background: #B8F256;
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-link:hover::after,
+    .nav-link.is-active::after {
+      transform: scaleX(1);
+    }
+    .mobile-nav-link.is-active {
+      text-decoration: underline;
+      text-decoration-color: #B8F256;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 4px;
+    }
+
+    /* ==================== Hero polaroid: straighten on hover ==================== */
+    .polaroid {
+      transition:
+        rotate 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        translate 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.35s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .polaroid:hover {
+        /* Tailwind's -rotate-2 is a transform, so +2deg here lands at 0deg */
+        rotate: 2deg;
+        translate: 0 -8px;
+        box-shadow: 9px 9px 0 0 #18181B;
+      }
+    }
+
+    /* ==================== Skills marquee strip ==================== */
+    .marquee {
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-scroll 34s linear infinite;
+    }
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+    .marquee-group {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding-right: 2rem;
+      white-space: nowrap;
+    }
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track {
+        animation: none;
+      }
+    }
+
     /* ==================== School Project cards: tilt + image zoom ==================== */
     #school-works article {
       --rx: 0deg;
@@ -390,11 +474,11 @@
       </a>
 
       <!-- Desktop Navigation Links -->
-      <nav class="hidden md:flex items-center gap-8 font-mono text-xs lg:text-sm font-bold tracking-wider">
-        <a href="#about" class="hover:text-lavender transition-colors py-1">ABOUT</a>
-        <a href="#featured-works" class="hover:text-lavender transition-colors py-1">FEATURED WORKS</a>
-        <a href="#featured-works" class="hover:text-lavender transition-colors py-1">EXPERIENCE</a>
-        <a href="#skills-edu" class="hover:text-lavender transition-colors py-1">SKILLS</a>
+      <nav class="hidden md:flex items-center gap-6 lg:gap-8 font-mono text-xs lg:text-sm font-bold tracking-wider">
+        <a href="#about" data-nav="about" class="nav-link hover:text-lavender transition-colors py-1">ABOUT</a>
+        <a href="#featured-works" data-nav="featured-works" class="nav-link hover:text-lavender transition-colors py-1">FEATURED WORKS</a>
+        <a href="#school-works" data-nav="school-works" class="nav-link hover:text-lavender transition-colors py-1">SCHOOL PROJECTS</a>
+        <a href="#skills-edu" data-nav="skills-edu" class="nav-link hover:text-lavender transition-colors py-1">SKILLS</a>
       </nav>
 
       <!-- Right Actions: Mobile Menu Toggle + Contact CTA -->
@@ -407,14 +491,18 @@
           <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
         </a>
       </div>
+
+      <!-- Scroll progress line -->
+      <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
     </header>
 
     <!-- Mobile Dropdown Navigation -->
     <div id="mobile-nav" class="hidden md:hidden bg-butter border-b-2 border-ink px-6 py-4 font-mono text-sm font-bold space-y-3">
-      <a href="#about" class="block hover:underline">01. ABOUT ME</a>
-      <a href="#featured-works" class="block hover:underline">02. FEATURED WORKS &amp; EXPERIENCE</a>
-      <a href="#skills-edu" class="block hover:underline">03. SKILLS &amp; EDUCATION</a>
-      <a href="#contact" class="block hover:underline">04. CONTACT &amp; LINKS</a>
+      <a href="#about" data-nav="about" class="mobile-nav-link block hover:underline">01. ABOUT ME</a>
+      <a href="#featured-works" data-nav="featured-works" class="mobile-nav-link block hover:underline">02. FEATURED WORKS &amp; EXPERIENCE</a>
+      <a href="#school-works" data-nav="school-works" class="mobile-nav-link block hover:underline">03. SCHOOL PROJECTS</a>
+      <a href="#skills-edu" data-nav="skills-edu" class="mobile-nav-link block hover:underline">04. SKILLS &amp; EDUCATION</a>
+      <a href="#contact" class="mobile-nav-link block hover:underline">05. CONTACT &amp; LINKS</a>
     </div>
 
     <!-- ==================== 2. HERO & ABOUT SECTION ==================== -->
@@ -470,7 +558,7 @@
             <div class="absolute inset-0 bg-cream border-2 border-ink shadow-brutal translate-x-2.5 translate-y-2 rotate-2"></div>
 
             <!-- Main Front Polaroid Card -->
-            <div class="relative bg-cream p-3.5 pb-6 border-2 border-ink shadow-brutal-lg -rotate-2 w-64 sm:w-72 z-10">
+            <div class="polaroid relative bg-cream p-3.5 pb-6 border-2 border-ink shadow-brutal-lg -rotate-2 w-64 sm:w-72 z-10">
               <!-- Yellow Masking Tape Strip Top-Left -->
               <div class="washi-tape w-24 h-6 absolute -top-3 -left-5 -rotate-45 z-20"></div>
               <!-- Yellow Masking Tape Strip Bottom-Right -->
@@ -814,6 +902,28 @@
 
       </div>
     </section>
+
+    <!-- Skills marquee divider -->
+    <div class="marquee bg-lime border-b-2 border-ink" aria-hidden="true">
+      <div class="marquee-track py-2.5 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.22em] text-ink">
+        <div class="marquee-group">
+          <span>Graphic Design</span><span class="opacity-40">✦</span>
+          <span>Photography</span><span class="opacity-40">✦</span>
+          <span>Motion Graphics</span><span class="opacity-40">✦</span>
+          <span>Brand Identity</span><span class="opacity-40">✦</span>
+          <span>Social Media</span><span class="opacity-40">✦</span>
+          <span>3D &amp; Nirmana</span><span class="opacity-40">✦</span>
+        </div>
+        <div class="marquee-group">
+          <span>Graphic Design</span><span class="opacity-40">✦</span>
+          <span>Photography</span><span class="opacity-40">✦</span>
+          <span>Motion Graphics</span><span class="opacity-40">✦</span>
+          <span>Brand Identity</span><span class="opacity-40">✦</span>
+          <span>Social Media</span><span class="opacity-40">✦</span>
+          <span>3D &amp; Nirmana</span><span class="opacity-40">✦</span>
+        </div>
+      </div>
+    </div>
 
     <!-- ==================== 3B. SCHOOL PROJECTS (ACADEMIC WORKS) ==================== -->
     <section id="school-works" class="border-b-2 border-ink bg-cream p-6 sm:p-10 lg:p-12">
@@ -1292,8 +1402,13 @@
             LET'S BUILD SOMETHING <br class="hidden sm:inline" />
             AMAZING TOGETHER!
           </h2>
-          <p class="font-mono text-xs sm:text-sm text-ink/80 mt-3">
-            Ceasar Riko Priyo Susantio • Surabaya, East Java, Indonesia
+          <p class="font-mono text-xs sm:text-sm text-ink/80 mt-3 flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span>Ceasar Riko Priyo Susantio • Surabaya, East Java, Indonesia</span>
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 bg-lime border border-ink rounded-full" aria-hidden="true"></span>
+              <span id="wib-time">--:--</span>
+              <span>WIB</span>
+            </span>
           </p>
         </div>
 
@@ -1774,6 +1889,87 @@
       }, { passive: true });
       window.addEventListener('resize', revealPassed);
       revealPassed();
+    })();
+
+    // Scroll progress line + active navigation link
+    (function initScrollUI() {
+      const bar = document.getElementById('scroll-progress');
+      const header = document.querySelector('header');
+      const links = Array.from(document.querySelectorAll('[data-nav]'));
+      const sections = links
+        .map(link => ({ link, section: document.getElementById(link.dataset.nav) }))
+        .filter(item => item.section);
+
+      let ticking = false;
+
+      function update() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+
+        if (bar) {
+          bar.style.transform = `scaleX(${max > 0 ? Math.min(scrollTop / max, 1) : 0})`;
+        }
+
+        if (sections.length) {
+          const headerHeight = header ? header.offsetHeight : 0;
+          const line = scrollTop + headerHeight + 120;
+          let current = sections[0].section.id;
+
+          sections.forEach(({ section }) => {
+            const top = section.getBoundingClientRect().top + scrollTop;
+            if (top <= line) current = section.id;
+          });
+
+          // Footer in view: no nav item should stay highlighted
+          const contact = document.getElementById('contact');
+          if (contact && contact.getBoundingClientRect().top < window.innerHeight) {
+            current = null;
+          }
+
+          links.forEach(link => {
+            const active = link.dataset.nav === current;
+            link.classList.toggle('is-active', active);
+            if (active) link.setAttribute('aria-current', 'true');
+            else link.removeAttribute('aria-current');
+          });
+        }
+
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      }, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+
+    // Live Surabaya time (WIB)
+    (function initWibClock() {
+      const el = document.getElementById('wib-time');
+      if (!el) return;
+
+      let formatter;
+      try {
+        formatter = new Intl.DateTimeFormat('en-GB', {
+          timeZone: 'Asia/Jakarta',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        });
+      } catch (err) {
+        return;
+      }
+
+      function tick() {
+        el.textContent = formatter.format(new Date());
+      }
+
+      tick();
+      window.setInterval(tick, 30000);
     })();
 
     // Custom cursor (desktop / fine pointer only)
