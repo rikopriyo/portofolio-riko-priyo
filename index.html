@@ -118,10 +118,12 @@
     html.dark .bg-mint,
     html.dark .bg-sky,
     html.dark .bg-pink,
+    html.dark .bg-lavender,
     html.dark .hover\:bg-lime:hover,
     html.dark .hover\:bg-butter:hover,
     html.dark .hover\:bg-sky:hover,
-    html.dark .hover\:bg-mint:hover {
+    html.dark .hover\:bg-mint:hover,
+    html.dark .hover\:bg-lavender:hover {
       color: #18181B;
     }
 
@@ -499,6 +501,14 @@
     }
     ::view-transition-old(root) { z-index: 1; }
     ::view-transition-new(root) { z-index: 2; }
+
+    /* Palette changes must be instant while the reveal snapshot is captured */
+    html.theme-switching,
+    html.theme-switching *,
+    html.theme-switching *::before,
+    html.theme-switching *::after {
+      transition: none !important;
+    }
 
     @keyframes theme-icon-pop {
       0% { transform: rotate(-90deg) scale(0.4); opacity: 0; }
@@ -1206,7 +1216,7 @@
         <!-- 04 — Desain Baju -->
         <article onclick="openProject(3)" data-category="graphic-design" class="group bg-surface border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-butter border-b-2 border-ink overflow-hidden">
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-inkdeep">
               <i class="fa-solid fa-shirt text-3xl mb-1"></i>
               <span class="font-mono text-[9px] font-bold">APPAREL</span>
             </div>
@@ -1231,7 +1241,7 @@
         <!-- 05 — 3D Project -->
         <article onclick="openProject(4)" data-category="3d" class="group bg-surface border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-mint border-b-2 border-ink overflow-hidden">
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-inkdeep">
               <i class="fa-solid fa-cube text-3xl mb-1"></i>
               <span class="font-mono text-[9px] font-bold">3D</span>
             </div>
@@ -1256,7 +1266,7 @@
         <!-- 06 — Nirmana -->
         <article onclick="openProject(5)" data-category="graphic-design" class="group bg-surface border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-lavender border-b-2 border-ink overflow-hidden">
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-inkdeep">
               <i class="fa-solid fa-shapes text-3xl mb-1"></i>
               <span class="font-mono text-[9px] font-bold">BASIC DESIGN</span>
             </div>
@@ -2280,6 +2290,9 @@
       const meta = document.getElementById('theme-color-meta');
       if (!btn) return;
 
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let switching = false;
+
       function apply(theme) {
         const dark = theme === 'dark';
         document.documentElement.classList.toggle('dark', dark);
@@ -2290,12 +2303,119 @@
         if (meta) meta.setAttribute('content', dark ? '#131316' : '#B8F256');
       }
 
+      function persist(theme) {
+        try { localStorage.setItem('theme', theme); } catch (e) {}
+      }
+
+      function pulseIcon() {
+        btn.classList.remove('is-switching');
+        void btn.offsetWidth; // restart the animation
+        btn.classList.add('is-switching');
+        window.setTimeout(() => btn.classList.remove('is-switching'), 560);
+      }
+
+      function clearSwitchClass() {
+        document.documentElement.classList.remove('theme-switching');
+      }
+
+      // Fallback for browsers without View Transitions: wash from the old color
+      function fadeSwitch(theme) {
+        const oldBg = getComputedStyle(document.body).backgroundColor;
+        const overlay = document.createElement('div');
+        overlay.setAttribute('aria-hidden', 'true');
+        overlay.style.cssText = [
+          'position:fixed', 'inset:0', 'z-index:9998', 'pointer-events:none',
+          `background:${oldBg}`, 'opacity:1', 'transition:opacity 0.32s ease'
+        ].join(';');
+        document.body.appendChild(overlay);
+        apply(theme);
+        persist(theme);
+        requestAnimationFrame(() => { overlay.style.opacity = '0'; });
+        window.setTimeout(() => overlay.remove(), 400);
+        pulseIcon();
+      }
+
+      function switchTo(theme) {
+        if (switching) return;
+        if (reduceMotion.matches) {
+          apply(theme);
+          persist(theme);
+          return;
+        }
+
+        if (typeof document.startViewTransition !== 'function') {
+          fadeSwitch(theme);
+          return;
+        }
+
+        // Circular reveal that grows from the toggle button
+        const rect = btn.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        const radius = Math.hypot(
+          Math.max(x, window.innerWidth - x),
+          Math.max(y, window.innerHeight - y)
+        );
+
+        switching = true;
+        document.documentElement.classList.add('theme-switching');
+        let applied = false;
+        let transition;
+        try {
+          transition = document.startViewTransition(() => {
+            applied = true;
+            apply(theme);
+            persist(theme);
+          });
+        } catch (e) {
+          switching = false;
+          clearSwitchClass();
+          apply(theme);
+          persist(theme);
+          pulseIcon();
+          return;
+        }
+
+        // Safety net: if the transition cannot start (e.g. backgrounded window),
+        // still switch the theme instead of leaving the page stuck.
+        window.setTimeout(() => {
+          if (applied) return;
+          applied = true;
+          switching = false;
+          clearSwitchClass();
+          apply(theme);
+          persist(theme);
+          pulseIcon();
+        }, 300);
+        window.setTimeout(clearSwitchClass, 1200);
+
+        transition.ready.then(() => {
+          document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${radius}px at ${x}px ${y}px)`
+              ]
+            },
+            {
+              duration: 520,
+              easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+              pseudoElement: '::view-transition-new(root)'
+            }
+          );
+        }).catch(() => {});
+
+        transition.finished.finally(() => {
+          switching = false;
+          clearSwitchClass();
+          pulseIcon();
+        });
+      }
+
       apply(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
 
       btn.addEventListener('click', () => {
-        const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
-        apply(next);
-        try { localStorage.setItem('theme', next); } catch (e) {}
+        switchTo(document.documentElement.classList.contains('dark') ? 'light' : 'dark');
       });
 
       // Follow the OS setting only while the visitor has not picked a theme yet
