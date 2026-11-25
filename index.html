@@ -3,22 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // Apply saved theme (or system preference) before first paint to avoid a flash
+    (function () {
+      var dark = false;
+      try {
+        var saved = localStorage.getItem('theme');
+        dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      } catch (e) {}
+      if (dark) document.documentElement.classList.add('dark');
+      document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    })();
+  </script>
   <title>CEASAR RIKO — DKV Creative</title>
   <meta name="description" content="Portfolio of Ceasar Riko Priyo Susantio — a Visual Communication Design (DKV) student at SMKN 10 Surabaya working in graphic design, photography, and motion graphics." />
   <meta name="author" content="Ceasar Riko Priyo Susantio" />
-  <meta name="theme-color" content="#B8F256" />
-  <link rel="canonical" href="https://rikopriyo.github.io/portofolio-riko-priyo/" />
+  <meta name="theme-color" id="theme-color-meta" content="#B8F256" />
+  <link rel="canonical" href="https://rikopriyo.github.io/" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23B8F256'/%3E%3Crect x='4' y='4' width='56' height='56' rx='7' fill='none' stroke='%2318181B' stroke-width='4'/%3E%3Ctext x='32' y='45' font-family='Arial Black,Arial,sans-serif' font-size='34' font-weight='900' text-anchor='middle' fill='%2318181B'%3ER%3C/text%3E%3C/svg%3E" />
   <!-- Social sharing preview -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Ceasar Riko — DKV Creative" />
   <meta property="og:description" content="DKV student at SMKN 10 Surabaya — graphic design, photography, motion graphics, and 3D work." />
-  <meta property="og:url" content="https://rikopriyo.github.io/portofolio-riko-priyo/" />
-  <meta property="og:image" content="https://rikopriyo.github.io/portofolio-riko-priyo/foto-ceasar-riko.jpeg" />
+  <meta property="og:url" content="https://rikopriyo.github.io/" />
+  <meta property="og:image" content="https://rikopriyo.github.io/foto-ceasar-riko.jpeg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Ceasar Riko — DKV Creative" />
   <meta name="twitter:description" content="DKV student at SMKN 10 Surabaya — graphic design, photography, motion graphics, and 3D work." />
-  <meta name="twitter:image" content="https://rikopriyo.github.io/portofolio-riko-priyo/foto-ceasar-riko.jpeg" />
+  <meta name="twitter:image" content="https://rikopriyo.github.io/foto-ceasar-riko.jpeg" />
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Space Grotesk, Plus Jakarta Sans, JetBrains Mono, Caveat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,14 +44,16 @@
       theme: {
         extend: {
           colors: {
-            cream: '#FAF9F6',
-            ink: '#18181B',
-            lavender: '#8B7CFF',
-            lime: '#B8F256',
-            pink: '#FF85A1',
-            butter: '#FDE047',
-            sky: '#A5F3FC',
-            mint: '#BBF7D0'
+            cream: 'rgb(var(--c-cream) / <alpha-value>)',
+            surface: 'rgb(var(--c-surface) / <alpha-value>)',
+            ink: 'rgb(var(--c-ink) / <alpha-value>)',
+            inkdeep: '#18181B',
+            lavender: 'rgb(var(--c-lavender) / <alpha-value>)',
+            lime: 'rgb(var(--c-lime) / <alpha-value>)',
+            pink: 'rgb(var(--c-pink) / <alpha-value>)',
+            butter: 'rgb(var(--c-butter) / <alpha-value>)',
+            sky: 'rgb(var(--c-sky) / <alpha-value>)',
+            mint: 'rgb(var(--c-mint) / <alpha-value>)'
           },
           fontFamily: {
             display: ['"Space Grotesk"', 'sans-serif'],
@@ -48,9 +62,9 @@
             script: ['"Caveat"', 'cursive']
           },
           boxShadow: {
-            brutal: '4px 4px 0px 0px #18181B',
-            'brutal-lg': '6px 6px 0px 0px #18181B',
-            'brutal-sm': '2px 2px 0px 0px #18181B',
+            brutal: '4px 4px 0px 0px var(--c-shadow)',
+            'brutal-lg': '6px 6px 0px 0px var(--c-shadow)',
+            'brutal-sm': '2px 2px 0px 0px var(--c-shadow)',
           }
         }
       }
@@ -58,6 +72,102 @@
   </script>
 
   <style>
+    /* ==================== Theme tokens (light / dark) ==================== */
+    :root {
+      --c-cream: 250 249 246;
+      --c-surface: 255 255 255;
+      --c-ink: 24 24 27;
+      --c-lavender: 139 124 255;
+      --c-lime: 184 242 86;
+      --c-pink: 255 133 161;
+      --c-butter: 253 224 71;
+      --c-sky: 165 243 252;
+      --c-mint: 187 247 208;
+      --c-shadow: #18181B;
+      color-scheme: light;
+    }
+    html.dark {
+      --c-cream: 19 19 22;
+      --c-surface: 30 30 36;
+      --c-ink: 241 240 234;
+      --c-lavender: 155 140 255;
+      --c-lime: 184 242 86;
+      --c-pink: 255 133 161;
+      --c-butter: 253 224 71;
+      --c-sky: 165 243 252;
+      --c-mint: 187 247 208;
+      --c-shadow: #000000;
+      color-scheme: dark;
+    }
+
+    html.dark .bg-graph-paper {
+      background-color: #141417;
+      background-image:
+        linear-gradient(to right, rgba(241, 240, 234, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(241, 240, 234, 0.06) 1px, transparent 1px);
+    }
+    html.dark .bg-pink-grid {
+      background-color: #6E2B3C;
+      background-image:
+        linear-gradient(to right, rgba(0, 0, 0, 0.16) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.16) 1px, transparent 1px);
+    }
+    /* Bright accent chips keep dark ink text in both themes */
+    html.dark .bg-lime,
+    html.dark .bg-butter,
+    html.dark .bg-mint,
+    html.dark .bg-sky,
+    html.dark .bg-pink,
+    html.dark .hover\:bg-lime:hover,
+    html.dark .hover\:bg-butter:hover,
+    html.dark .hover\:bg-sky:hover,
+    html.dark .hover\:bg-mint:hover {
+      color: #18181B;
+    }
+
+    /* Large paper panels turn dark, so their copy switches to light ink */
+    .skills-panel {
+      background-color: #BBF7D0;
+    }
+    html.dark .skills-panel {
+      background-color: #16241C;
+    }
+    html.dark #about-card {
+      background-color: #2A2410;
+    }
+    html.dark #about-card h2,
+    html.dark #about-card p {
+      color: rgb(var(--c-ink));
+    }
+    html.dark #mobile-nav {
+      background-color: #2A2410;
+      color: rgb(var(--c-ink));
+    }
+    html.dark .tile-bright {
+      color: #18181B;
+    }
+    html.dark #contact {
+      background-color: #2A1620;
+    }
+
+    html.dark ::selection {
+      background: #B8F256;
+      color: #18181B;
+    }
+    html.dark ::-webkit-scrollbar-track {
+      background: #131316;
+      border-left-color: #3A3A42;
+    }
+    html.dark ::-webkit-scrollbar-thumb {
+      border-color: #131316;
+    }
+    html.dark .cursor-ring {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M2 8V2h6M16 2h6v6M22 16v6h-6M8 22H2v-6' stroke='%23F1F0EA' stroke-width='3'/%3E%3C/svg%3E");
+    }
+    html.dark .cursor-ring.is-hover {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M2 8V2h6M16 2h6v6M22 16v6h-6M8 22H2v-6' stroke='%2318181B' stroke-width='3'/%3E%3C/svg%3E");
+    }
+
     /* Graph Paper & Grid Textures matching initial design */
     .bg-graph-paper {
       background-color: #FAF9F6;
@@ -85,17 +195,17 @@
 
     /* Neobrutalist Interactive Button States */
     .btn-brutal {
-      border: 2px solid #18181B;
-      box-shadow: 4px 4px 0px 0px #18181B;
+      border: 2px solid rgb(var(--c-ink));
+      box-shadow: 4px 4px 0px 0px var(--c-shadow);
       transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
     }
     .btn-brutal:hover {
       transform: translate(-2px, -2px);
-      box-shadow: 6px 6px 0px 0px #18181B;
+      box-shadow: 6px 6px 0px 0px var(--c-shadow);
     }
     .btn-brutal:active {
       transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0px 0px #18181B;
+      box-shadow: 1px 1px 0px 0px var(--c-shadow);
     }
 
     /* Translucent Washi Masking Tape */
@@ -165,7 +275,7 @@
     }
     #skills-edu .rounded-2xl:hover {
       translate: 0 -3px;
-      box-shadow: 6px 6px 0px 0px #18181B;
+      box-shadow: 6px 6px 0px 0px var(--c-shadow);
     }
 
     /* Modal pop-in when opened */
@@ -376,6 +486,36 @@
       text-underline-offset: 4px;
     }
 
+    /* Theme toggle icons */
+    #theme-toggle .theme-icon-sun { display: none; }
+    html.dark #theme-toggle .theme-icon-sun { display: inline-block; }
+    html.dark #theme-toggle .theme-icon-moon { display: none; }
+
+    /* Theme switch: circular reveal from the toggle (View Transitions) */
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+    ::view-transition-old(root) { z-index: 1; }
+    ::view-transition-new(root) { z-index: 2; }
+
+    @keyframes theme-icon-pop {
+      0% { transform: rotate(-90deg) scale(0.4); opacity: 0; }
+      60% { transform: rotate(6deg) scale(1.08); opacity: 1; }
+      100% { transform: none; opacity: 1; }
+    }
+    #theme-toggle.is-switching .theme-icon-sun,
+    #theme-toggle.is-switching .theme-icon-moon {
+      animation: theme-icon-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #theme-toggle.is-switching .theme-icon-sun,
+      #theme-toggle.is-switching .theme-icon-moon {
+        animation: none;
+      }
+    }
+
     /* ==================== Hero polaroid: straighten on hover ==================== */
     .polaroid {
       transition:
@@ -388,7 +528,7 @@
         /* Tailwind's -rotate-2 is a transform, so +2deg here lands at 0deg */
         rotate: 2deg;
         translate: 0 -8px;
-        box-shadow: 9px 9px 0 0 #18181B;
+        box-shadow: 9px 9px 0 0 var(--c-shadow);
       }
     }
 
@@ -453,6 +593,13 @@
         width: 100%;
         box-shadow: none !important;
         border: none !important;
+        background: #FFFFFF !important;
+      }
+      #cv-printable-area,
+      #cv-printable-area * {
+        color: #18181B !important;
+        border-color: #18181B !important;
+        box-shadow: none !important;
       }
       .no-print {
         display: none !important;
@@ -468,8 +615,8 @@
     <!-- ==================== 1. TOP NAVBAR ==================== -->
     <header class="sticky top-0 z-40 bg-cream border-b-2 border-ink flex items-stretch justify-between">
       <!-- Brand Badge (Lime Block) -->
-      <a href="#" class="bg-lime px-4 sm:px-6 py-3.5 border-r-2 border-ink flex items-center gap-2 font-display font-bold text-base sm:text-lg tracking-tight hover:bg-butter transition-colors">
-        <span class="inline-block w-2.5 h-2.5 bg-ink rounded-full"></span>
+      <a href="#" class="bg-lime px-4 sm:px-6 py-3.5 border-r-2 border-ink flex items-center gap-2 font-display font-bold text-base sm:text-lg tracking-tight text-inkdeep hover:bg-butter transition-colors">
+        <span class="inline-block w-2.5 h-2.5 bg-inkdeep rounded-full"></span>
         <span>RIKO PRIYO</span>
       </a>
 
@@ -481,12 +628,16 @@
         <a href="#skills-edu" data-nav="skills-edu" class="nav-link hover:text-lavender transition-colors py-1">SKILLS</a>
       </nav>
 
-      <!-- Right Actions: Mobile Menu Toggle + Contact CTA -->
+      <!-- Right Actions: Theme + Mobile Menu Toggle + Contact CTA -->
       <div class="flex items-stretch">
+        <button id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode" class="px-3 border-l-2 border-ink bg-cream hover:bg-butter flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-moon theme-icon-moon text-base" aria-hidden="true"></i>
+          <i class="fa-solid fa-sun theme-icon-sun text-base" aria-hidden="true"></i>
+        </button>
         <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden px-4 border-l-2 border-ink bg-cream hover:bg-butter flex items-center justify-center">
           <i class="fa-solid fa-bars text-lg"></i>
         </button>
-        <a href="#contact" class="bg-lavender text-white font-mono font-bold text-xs sm:text-sm px-4 sm:px-6 py-3.5 border-l-2 border-ink flex items-center gap-2 hover:bg-ink transition-colors">
+        <a href="#contact" class="bg-lavender text-white font-mono font-bold text-xs sm:text-sm px-4 sm:px-6 py-3.5 border-l-2 border-ink flex items-center gap-2 hover:bg-inkdeep transition-colors">
           <span>CONTACT ME</span>
           <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
         </a>
@@ -531,7 +682,7 @@
               <path d="M2 8C2 4.68629 4.68629 2 8 2H22L28 9H56C59.3137 9 62 11.6863 62 15V44C62 47.3137 59.3137 50 56 50H8C4.68629 50 2 47.3137 2 44V8Z" fill="#A5F3FC" stroke="#18181B" stroke-width="2.5"/>
               <path d="M2 16H62V44C62 47.3137 59.3137 50 56 50H8C4.68629 50 2 47.3137 2 44V16Z" fill="#CFFAFE" stroke="#18181B" stroke-width="2.5"/>
             </svg>
-            <span class="mt-1 bg-cream border border-ink px-1.5 py-0.5 font-mono text-[10px] font-bold rounded shadow-brutal-sm hover:bg-lime">adaptable</span>
+            <span class="mt-1 bg-cream border border-ink px-1.5 py-0.5 font-mono text-[10px] font-bold rounded shadow-brutal-sm hover:bg-lime hover:text-inkdeep">adaptable</span>
           </button>
 
           <!-- Floating OS Folder 2: Bottom Left (andrewarna_02) -->
@@ -540,7 +691,7 @@
               <path d="M2 8C2 4.68629 4.68629 2 8 2H22L28 9H56C59.3137 9 62 11.6863 62 15V44C62 47.3137 59.3137 50 56 50H8C4.68629 50 2 47.3137 2 44V8Z" fill="#B8F256" stroke="#18181B" stroke-width="2.5"/>
               <path d="M2 16H62V44C62 47.3137 59.3137 50 56 50H8C4.68629 50 2 47.3137 2 44V16Z" fill="#D9F99D" stroke="#18181B" stroke-width="2.5"/>
             </svg>
-            <span class="mt-1 bg-cream border border-ink px-1.5 py-0.5 font-mono text-[10px] font-bold rounded shadow-brutal-sm hover:bg-butter">resilient</span>
+            <span class="mt-1 bg-cream border border-ink px-1.5 py-0.5 font-mono text-[10px] font-bold rounded shadow-brutal-sm hover:bg-butter hover:text-inkdeep">resilient</span>
           </button>
 
           <!-- Floating OS Folder 3: Bottom Right (cv_riko.pdf) -->
@@ -549,7 +700,7 @@
               <path d="M2 8C2 4.68629 4.68629 2 8 2H22L28 9H56C59.3137 9 62 11.6863 62 15V44C62 47.3137 59.3137 50 56 50H8C4.68629 50 2 47.3137 2 44V8Z" fill="#FDE047" stroke="#18181B" stroke-width="2.5"/>
               <path d="M2 16H62V44C62 47.3137 59.3137 50 56 50H8C4.68629 50 2 47.3137 2 44V16Z" fill="#FEF08A" stroke="#18181B" stroke-width="2.5"/>
             </svg>
-            <span class="mt-1 bg-cream border border-ink px-1.5 py-0.5 font-mono text-[10px] font-bold rounded shadow-brutal-sm hover:bg-lime">visionary</span>
+            <span class="mt-1 bg-cream border border-ink px-1.5 py-0.5 font-mono text-[10px] font-bold rounded shadow-brutal-sm hover:bg-lime hover:text-inkdeep">visionary</span>
           </button>
 
           <!-- Stacked Polaroid Photo Frame with User's Uploaded Image -->
@@ -572,7 +723,7 @@
                   class="w-full h-full object-cover object-top"
                   onerror="this.onerror=null; this.src='https://placehold.co/400x480/A5F3FC/18181B?text=Ceasar+Riko+%0ADKV+Surabaya';"
                 />
-                <span class="absolute bottom-2 right-2 bg-lime text-ink font-mono text-[10px] font-bold px-2 py-0.5 border border-ink shadow-brutal-sm">
+                <span class="absolute bottom-2 right-2 bg-lime text-inkdeep font-mono text-[10px] font-bold px-2 py-0.5 border border-ink shadow-brutal-sm">
                   SURABAYA, ID
                 </span>
               </div>
@@ -605,18 +756,18 @@
           </p>
 
           <!-- Yellow OS Window Card: ABOUT ME -->
-          <div class="relative bg-butter border-2 border-ink rounded-xl shadow-brutal-lg p-5 sm:p-6 mb-7">
+          <div id="about-card" class="relative bg-butter border-2 border-ink rounded-xl shadow-brutal-lg p-5 sm:p-6 mb-7">
             <!-- Folder Tab Accent on Top Right -->
-            <div class="absolute -top-3.5 right-6 bg-mint border-2 border-ink px-2.5 py-0.5 rounded-t-md font-mono text-[10px] font-bold">
+            <div class="absolute -top-3.5 right-6 bg-mint border-2 border-ink px-2.5 py-0.5 rounded-t-md font-mono text-[10px] font-bold text-inkdeep">
               ABOUT_ME.TXT
             </div>
 
             <div class="flex items-center justify-between border-b-2 border-ink pb-2 mb-3">
-              <h2 class="font-display font-bold text-xl uppercase tracking-tight">ABOUT ME</h2>
-              <span class="font-mono text-xs font-bold bg-cream px-2 py-0.5 border border-ink rounded">Ceasar Riko Priyo Susantio</span>
+              <h2 class="font-display font-bold text-xl uppercase tracking-tight text-inkdeep">ABOUT ME</h2>
+              <span class="font-mono text-xs font-bold bg-cream text-ink px-2 py-0.5 border border-ink rounded">Ceasar Riko Priyo Susantio</span>
             </div>
 
-            <p class="font-sans text-sm sm:text-[15px] text-ink leading-relaxed font-medium">
+            <p class="font-sans text-sm sm:text-[15px] text-inkdeep leading-relaxed font-medium">
               I am a vocational high school student majoring in <strong>Visual Communication Design (DKV)</strong> with experience in graphic design, photography, and social media management. I adapt quickly to new environments, enjoy working behind the scenes, and am always eager to learn new skills. During my internship, I was trusted to handle event documentation and social media content, which strengthened both my technical and teamwork abilities. I am looking for opportunities to grow professionally while contributing through creativity, responsibility, and dedication.
             </p>
           </div>
@@ -627,18 +778,18 @@
           
           <!-- CV Action Buttons (5 cols) -->
           <div class="sm:col-span-5 flex flex-col justify-between gap-3">
-            <button onclick="openCVModal()" class="btn-brutal w-full bg-lime hover:bg-butter text-ink font-display font-bold text-base sm:text-lg px-5 py-3.5 rounded-lg flex items-center justify-center gap-2.5">
+            <button onclick="openCVModal()" class="btn-brutal w-full bg-lime hover:bg-butter text-inkdeep font-display font-bold text-base sm:text-lg px-5 py-3.5 rounded-lg flex items-center justify-center gap-2.5">
               <span>VIEW &amp; DOWNLOAD CV</span>
               <i class="fa-solid fa-file-arrow-down"></i>
             </button>
-            <button onclick="downloadCVFile()" class="btn-brutal w-full bg-white hover:bg-sky text-ink font-mono font-bold text-xs px-4 py-2.5 rounded-lg flex items-center justify-center gap-2">
+            <button onclick="downloadCVFile()" class="btn-brutal w-full bg-surface hover:bg-sky text-ink font-mono font-bold text-xs px-4 py-2.5 rounded-lg flex items-center justify-center gap-2">
               <i class="fa-solid fa-download"></i>
               <span>SAVE CV FILE (.HTML)</span>
             </button>
           </div>
 
           <!-- Let's Connect Box with Direct IG & Email Links (7 cols) -->
-          <div class="sm:col-span-7 bg-white border-2 border-ink rounded-lg shadow-brutal p-4 flex flex-col justify-between">
+          <div class="sm:col-span-7 bg-surface border-2 border-ink rounded-lg shadow-brutal p-4 flex flex-col justify-between">
             <div class="flex items-center justify-between mb-2">
               <span class="font-display font-bold text-sm uppercase tracking-wider">LET'S CONNECT</span>
               <span class="font-mono text-[10px] font-bold bg-mint border border-ink px-2 py-0.5 rounded-full">AVAILABLE</span>
@@ -677,7 +828,7 @@
       <!-- Section Header + Filter Controls -->
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
         <div>
-          <span class="inline-block bg-butter border-2 border-ink px-3 py-1 rounded font-mono text-xs font-bold shadow-brutal-sm mb-2">
+          <span class="inline-block bg-butter text-inkdeep border-2 border-ink px-3 py-1 rounded font-mono text-xs font-bold shadow-brutal-sm mb-2">
             2026 INTERNSHIP &amp; CREATIVE TRACK RECORD
           </span>
           <h2 class="font-display font-bold text-3xl sm:text-5xl uppercase tracking-tight text-ink">
@@ -687,13 +838,13 @@
 
         <!-- Interactive Filter Pills -->
         <div class="flex flex-wrap gap-2" id="work-filters">
-          <button data-filter="all" class="filter-btn btn-brutal bg-ink text-white font-mono text-xs font-bold px-3.5 py-2 rounded-md">
+          <button data-filter="all" class="filter-btn btn-brutal bg-inkdeep text-white font-mono text-xs font-bold px-3.5 py-2 rounded-md">
             ALL (02)
           </button>
-          <button data-filter="its" class="filter-btn btn-brutal bg-white text-ink font-mono text-xs font-bold px-3.5 py-2 rounded-md">
+          <button data-filter="its" class="filter-btn btn-brutal bg-surface text-ink font-mono text-xs font-bold px-3.5 py-2 rounded-md">
             FTIRS ITS SURABAYA
           </button>
-          <button data-filter="andrewarna" class="filter-btn btn-brutal bg-white text-ink font-mono text-xs font-bold px-3.5 py-2 rounded-md">
+          <button data-filter="andrewarna" class="filter-btn btn-brutal bg-surface text-ink font-mono text-xs font-bold px-3.5 py-2 rounded-md">
             ANDREWARNA ADVERTISING
           </button>
         </div>
@@ -705,20 +856,20 @@
         <!-- ==================== EXPERIENCE & WORK 1: FTIRS ITS SURABAYA ==================== -->
         <article data-category="its" class="work-card flex flex-col gap-5">
           <!-- Main Experience Card (Mint Green Header + Cream Body) -->
-          <div class="bg-white border-2 border-ink rounded-xl shadow-brutal-lg overflow-hidden">
+          <div class="bg-surface border-2 border-ink rounded-xl shadow-brutal-lg overflow-hidden">
             <!-- Colored Top Header Block -->
-            <div class="bg-mint border-b-2 border-ink p-5 sm:p-6">
+            <div class="bg-mint text-inkdeep border-b-2 border-ink p-5 sm:p-6">
               <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                <span class="font-mono text-xs font-bold bg-cream border border-ink px-2.5 py-0.5 rounded shadow-brutal-sm">
+                <span class="font-mono text-xs font-bold bg-cream text-ink border border-ink px-2.5 py-0.5 rounded shadow-brutal-sm">
                   [February 2026 – April 2026]
                 </span>
-                <span class="font-mono text-xs font-bold uppercase text-ink/80">EXP // 01</span>
+                <span class="font-mono text-xs font-bold uppercase text-inkdeep/80">EXP // 01</span>
               </div>
 
-              <h3 class="font-display font-bold text-2xl sm:text-3xl leading-tight text-ink">
+              <h3 class="font-display font-bold text-2xl sm:text-3xl leading-tight text-inkdeep">
                 Faculty of Industrial Technology and Systems Engineering ITS Surabaya
               </h3>
-              <p class="font-mono text-xs sm:text-sm font-bold text-ink/90 mt-1.5">
+              <p class="font-mono text-xs sm:text-sm font-bold text-inkdeep/90 mt-1.5">
                 Social Media Team &amp; Photographer
               </p>
             </div>
@@ -809,7 +960,7 @@
             <!-- Polaroid 2A -->
             <div class="relative bg-cream p-2 pb-4 border-2 border-ink shadow-brutal -rotate-2">
               <div class="washi-tape w-10 h-3.5 absolute -top-2 left-1/2 -translate-x-1/2"></div>
-              <div class="aspect-[4/5] bg-ink border border-ink overflow-hidden flex items-center justify-center">
+              <div class="aspect-[4/5] bg-inkdeep border border-ink overflow-hidden flex items-center justify-center">
                 <img
                   src="proses-editing-konten-andrewarna.jpg"
                   alt="Proses editing konten video di CapCut — Andrewarna Advertising"
@@ -824,7 +975,7 @@
             <!-- Polaroid 2B -->
             <div class="relative bg-cream p-2 pb-4 border-2 border-ink shadow-brutal rotate-2 -translate-y-1">
               <div class="washi-tape w-10 h-3.5 absolute -top-2 left-1/2 -translate-x-1/2"></div>
-              <div class="aspect-[4/5] bg-ink border border-ink overflow-hidden">
+              <div class="aspect-[4/5] bg-inkdeep border border-ink overflow-hidden">
                 <img
                   src="foto-proses-laser-akrilik.jpg"
                   alt="Proses laser cutting akrilik — Andrewarna Advertising"
@@ -856,20 +1007,20 @@
           </div>
 
           <!-- Main Experience Card (Mint Green Header + Cream Body) -->
-          <div class="bg-white border-2 border-ink rounded-xl shadow-brutal-lg overflow-hidden">
+          <div class="bg-surface border-2 border-ink rounded-xl shadow-brutal-lg overflow-hidden">
             <!-- Colored Top Header Block -->
-            <div class="bg-mint border-b-2 border-ink p-5 sm:p-6">
+            <div class="bg-mint text-inkdeep border-b-2 border-ink p-5 sm:p-6">
               <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                <span class="font-mono text-xs font-bold bg-cream border border-ink px-2.5 py-0.5 rounded shadow-brutal-sm">
+                <span class="font-mono text-xs font-bold bg-cream text-ink border border-ink px-2.5 py-0.5 rounded shadow-brutal-sm">
                   [July 2026 – October 2026]
                 </span>
-                <span class="font-mono text-xs font-bold uppercase text-ink/80">EXP // 02</span>
+                <span class="font-mono text-xs font-bold uppercase text-inkdeep/80">EXP // 02</span>
               </div>
 
-              <h3 class="font-display font-bold text-2xl sm:text-3xl leading-tight text-ink">
+              <h3 class="font-display font-bold text-2xl sm:text-3xl leading-tight text-inkdeep">
                 Andrewarna Advertising Surabaya
               </h3>
-              <p class="font-mono text-xs sm:text-sm font-bold text-ink/90 mt-1.5">
+              <p class="font-mono text-xs sm:text-sm font-bold text-inkdeep/90 mt-1.5">
                 Design Team &amp; Cutting Machine Operator
               </p>
             </div>
@@ -905,7 +1056,7 @@
 
     <!-- Skills marquee divider -->
     <div class="marquee bg-lime border-b-2 border-ink" aria-hidden="true">
-      <div class="marquee-track py-2.5 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.22em] text-ink">
+      <div class="marquee-track py-2.5 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.22em] text-inkdeep">
         <div class="marquee-group">
           <span>Graphic Design</span><span class="opacity-40">✦</span>
           <span>Photography</span><span class="opacity-40">✦</span>
@@ -942,9 +1093,31 @@
             <span class="block mt-1 text-ink/50">Click a card to view details and zoom the photo.</span>
           </p>
         </div>
-        <span class="font-mono text-xs font-bold bg-white border-2 border-ink px-3 py-1.5 rounded shadow-brutal-sm self-start md:self-auto shrink-0">
+        <span id="project-count" class="font-mono text-xs font-bold bg-surface border-2 border-ink px-3 py-1.5 rounded shadow-brutal-sm self-start md:self-auto shrink-0">
           10 PROJECTS
         </span>
+      </div>
+
+      <!-- Category Filters -->
+      <div id="project-filters" class="flex flex-wrap items-center gap-2 mb-6" role="group" aria-label="Filter school projects by category">
+        <button data-filter="all" class="project-filter-btn btn-brutal bg-inkdeep text-white font-mono text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-md" aria-pressed="true">
+          ALL
+        </button>
+        <button data-filter="ui-ux" class="project-filter-btn btn-brutal bg-surface text-ink font-mono text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-md" aria-pressed="false">
+          UI/UX
+        </button>
+        <button data-filter="photography" class="project-filter-btn btn-brutal bg-surface text-ink font-mono text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-md" aria-pressed="false">
+          PHOTOGRAPHY
+        </button>
+        <button data-filter="motion" class="project-filter-btn btn-brutal bg-surface text-ink font-mono text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-md" aria-pressed="false">
+          MOTION GRAPHIC
+        </button>
+        <button data-filter="3d" class="project-filter-btn btn-brutal bg-surface text-ink font-mono text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-md" aria-pressed="false">
+          3D MODEL
+        </button>
+        <button data-filter="graphic-design" class="project-filter-btn btn-brutal bg-surface text-ink font-mono text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-md" aria-pressed="false">
+          GRAPHIC DESIGN
+        </button>
       </div>
 
       <!-- Project Cards Grid -->
@@ -956,8 +1129,8 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
 
         <!-- 01 — Figma -->
-        <article onclick="openProject(0)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
-          <div class="relative aspect-[4/3] bg-ink border-b-2 border-ink overflow-hidden">
+        <article onclick="openProject(0)" data-category="ui-ux" class="group bg-surface border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
+          <div class="relative aspect-[4/3] bg-inkdeep border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
               <i class="fa-brands fa-figma text-3xl mb-1"></i>
               <span class="font-mono text-[9px] font-bold">UI / UX</span>
@@ -981,7 +1154,7 @@
         </article>
 
         <!-- 02 — Photography -->
-        <article onclick="openProject(1)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
+        <article onclick="openProject(1)" data-category="photography" class="group bg-surface border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-pink/40 border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-camera-retro text-3xl mb-1"></i>
@@ -1006,7 +1179,7 @@
         </article>
 
         <!-- 03 — After Effects -->
-        <article onclick="openProject(2)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
+        <article onclick="openProject(2)" data-category="motion" class="group bg-surface border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-[#1E1B4B] border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-[#C4B5FD]">
               <span class="font-display font-bold text-3xl mb-1">Ae</span>
@@ -1031,7 +1204,7 @@
         </article>
 
         <!-- 04 — Desain Baju -->
-        <article onclick="openProject(3)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
+        <article onclick="openProject(3)" data-category="graphic-design" class="group bg-surface border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-butter border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-shirt text-3xl mb-1"></i>
@@ -1056,7 +1229,7 @@
         </article>
 
         <!-- 05 — 3D Project -->
-        <article onclick="openProject(4)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
+        <article onclick="openProject(4)" data-category="3d" class="group bg-surface border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-mint border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-cube text-3xl mb-1"></i>
@@ -1081,7 +1254,7 @@
         </article>
 
         <!-- 06 — Nirmana -->
-        <article onclick="openProject(5)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
+        <article onclick="openProject(5)" data-category="graphic-design" class="group bg-surface border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-lavender border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
               <i class="fa-solid fa-shapes text-3xl mb-1"></i>
@@ -1106,7 +1279,7 @@
         </article>
 
         <!-- 07 — Graphic Design (Pinterest-inspired) -->
-        <article onclick="openProject(6)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
+        <article onclick="openProject(6)" data-category="graphic-design" class="group bg-surface border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-cream border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-palette text-3xl mb-1"></i>
@@ -1131,7 +1304,7 @@
         </article>
 
         <!-- 08 — Graphic Design (extra slot 1) -->
-        <article onclick="openProject(7)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
+        <article onclick="openProject(7)" data-category="graphic-design" class="group bg-surface border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-cream border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-palette text-3xl mb-1"></i>
@@ -1156,7 +1329,7 @@
         </article>
 
         <!-- 09 — Graphic Design (extra slot 2) -->
-        <article onclick="openProject(8)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
+        <article onclick="openProject(8)" data-category="graphic-design" class="group bg-surface border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-cream border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-palette text-3xl mb-1"></i>
@@ -1181,7 +1354,7 @@
         </article>
 
         <!-- 10 — Graphic Design (extra slot 3) -->
-        <article onclick="openProject(9)" class="group bg-white border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
+        <article onclick="openProject(9)" data-category="graphic-design" class="group bg-surface border-2 border-ink rounded-xl shadow-brutal overflow-hidden flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-brutal-lg">
           <div class="relative aspect-[4/3] bg-cream border-b-2 border-ink overflow-hidden">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-ink">
               <i class="fa-solid fa-palette text-3xl mb-1"></i>
@@ -1209,7 +1382,7 @@
     </section>
 
     <!-- ==================== 4. SKILLS, SOFT SKILLS, EDUCATION & CERTIFICATIONS ==================== -->
-    <section id="skills-edu" class="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-ink bg-mint">
+    <section id="skills-edu" class="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-ink skills-panel">
       
       <!-- Column 1: TECHNICAL SKILLS (5 cols) -->
       <div class="lg:col-span-5 p-6 sm:p-8 lg:p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-ink flex flex-col justify-between">
@@ -1226,7 +1399,7 @@
             </div>
 
             <!-- CorelDRAW -->
-            <div class="bg-[#4ADE80] text-ink border-2 border-ink rounded-2xl p-3.5 shadow-brutal flex flex-col items-center justify-center text-center">
+            <div class="tile-bright bg-[#4ADE80] text-ink border-2 border-ink rounded-2xl p-3.5 shadow-brutal flex flex-col items-center justify-center text-center">
               <i class="fa-solid fa-pen-nib text-2xl mb-1"></i>
               <span class="font-mono text-[11px] font-bold leading-tight">CorelDRAW</span>
             </div>
@@ -1288,7 +1461,7 @@
             </div>
 
             <!-- Stitch -->
-            <div class="bg-[#E0F2FE] text-ink border-2 border-ink rounded-2xl p-3.5 shadow-brutal flex flex-col items-center justify-center text-center">
+            <div class="tile-bright bg-[#E0F2FE] text-ink border-2 border-ink rounded-2xl p-3.5 shadow-brutal flex flex-col items-center justify-center text-center">
               <i class="fa-solid fa-wand-magic-sparkles text-xl mb-1"></i>
               <span class="font-mono text-[11px] font-bold leading-tight">Stitch</span>
             </div>
@@ -1361,7 +1534,7 @@
             <div class="bg-cream/80 border-2 border-ink p-3 rounded-lg">
               <div class="flex items-center justify-between gap-2">
                 <h3 class="font-display font-bold text-base text-ink">SMP Negeri 23 Surabaya</h3>
-                <span class="font-mono text-[10px] font-bold bg-white border border-ink px-2 py-0.5 rounded">2021 – 2024</span>
+                <span class="font-mono text-[10px] font-bold bg-surface border border-ink px-2 py-0.5 rounded">2021 – 2024</span>
               </div>
             </div>
 
@@ -1369,7 +1542,7 @@
             <div class="bg-cream/80 border-2 border-ink p-3 rounded-lg">
               <div class="flex items-center justify-between gap-2">
                 <h3 class="font-display font-bold text-base text-ink">SD Negeri Penjaringan Sari II</h3>
-                <span class="font-mono text-[10px] font-bold bg-white border border-ink px-2 py-0.5 rounded">2015 – 2021</span>
+                <span class="font-mono text-[10px] font-bold bg-surface border border-ink px-2 py-0.5 rounded">2015 – 2021</span>
               </div>
               <p class="font-mono text-[11px] text-ink/70">Surabaya</p>
             </div>
@@ -1414,13 +1587,13 @@
 
         <div class="flex flex-wrap items-center gap-3">
           <!-- Instagram Button -->
-          <a href="https://www.instagram.com/softmodification/" target="_blank" rel="noopener noreferrer" class="btn-brutal bg-white hover:bg-butter text-ink font-mono text-xs font-bold px-4 py-3 rounded-lg inline-flex items-center gap-2">
+          <a href="https://www.instagram.com/softmodification/" target="_blank" rel="noopener noreferrer" class="btn-brutal bg-surface hover:bg-butter text-ink font-mono text-xs font-bold px-4 py-3 rounded-lg inline-flex items-center gap-2">
             <i class="fa-brands fa-instagram text-base"></i>
             <span>instagram.com/softmodification</span>
           </a>
 
           <!-- Email Button -->
-          <a href="mailto:rikopriyo58@gmail.com" class="btn-brutal bg-white hover:bg-sky text-ink font-mono text-xs font-bold px-4 py-3 rounded-lg inline-flex items-center gap-2">
+          <a href="mailto:rikopriyo58@gmail.com" class="btn-brutal bg-surface hover:bg-sky text-ink font-mono text-xs font-bold px-4 py-3 rounded-lg inline-flex items-center gap-2">
             <i class="fa-solid fa-envelope"></i>
             <span>rikopriyo58@gmail.com</span>
           </a>
@@ -1432,7 +1605,7 @@
           </a>
 
           <!-- Open CV Button -->
-          <button onclick="openCVModal()" class="btn-brutal bg-lavender text-white hover:bg-ink font-mono text-xs font-bold px-4 py-3 rounded-lg inline-flex items-center gap-2">
+          <button onclick="openCVModal()" class="btn-brutal bg-lavender text-white hover:bg-inkdeep font-mono text-xs font-bold px-4 py-3 rounded-lg inline-flex items-center gap-2">
             <i class="fa-solid fa-file-lines"></i>
             <span>FULL CV ↗</span>
           </button>
@@ -1443,12 +1616,12 @@
   </div>
 
   <!-- ==================== MODAL 1: WORK / EXPERIENCE CASE STUDY VIEWER ==================== -->
-  <div id="case-study-modal" class="fixed inset-0 z-50 hidden bg-ink/70 backdrop-blur-xs flex items-center justify-center p-4">
+  <div id="case-study-modal" class="fixed inset-0 z-50 hidden bg-inkdeep/70 backdrop-blur-xs flex items-center justify-center p-4">
     <div class="bg-cream border-2 border-ink rounded-xl shadow-brutal-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
       <!-- Modal Top Bar -->
       <div id="cs-modal-header" class="bg-mint border-b-2 border-ink px-5 py-3.5 flex items-center justify-between sticky top-0 z-10">
         <span id="cs-modal-tag" class="font-mono text-xs font-bold">EXPERIENCE &amp; WORK DETAILS</span>
-        <button onclick="closeCaseStudy()" class="btn-brutal bg-white w-8 h-8 rounded flex items-center justify-center font-bold text-sm">
+        <button onclick="closeCaseStudy()" class="btn-brutal bg-surface text-ink w-8 h-8 rounded flex items-center justify-center font-bold text-sm">
           ✕
         </button>
       </div>
@@ -1461,7 +1634,7 @@
           <p id="cs-modal-role" class="font-mono text-sm font-bold text-lavender mt-1">Role</p>
         </div>
 
-        <div class="bg-white border-2 border-ink p-4 rounded-lg shadow-brutal-sm">
+        <div class="bg-surface border-2 border-ink p-4 rounded-lg shadow-brutal-sm">
           <h4 class="font-mono text-xs font-bold bg-pink inline-block px-2 py-0.5 border border-ink rounded mb-2">KEY RESPONSIBILITIES &amp; OUTPUTS</h4>
           <ul id="cs-modal-bullets" class="space-y-2 font-sans text-sm text-ink list-disc pl-5 leading-relaxed"></ul>
         </div>
@@ -1473,7 +1646,7 @@
 
         <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t-2 border-dashed border-ink/20">
           <div id="cs-modal-tools" class="flex flex-wrap gap-2"></div>
-          <button onclick="closeCaseStudy()" class="btn-brutal bg-ink text-white font-mono text-xs font-bold px-4 py-2 rounded">
+          <button onclick="closeCaseStudy()" class="btn-brutal bg-inkdeep text-white font-mono text-xs font-bold px-4 py-2 rounded">
             CLOSE
           </button>
         </div>
@@ -1483,14 +1656,14 @@
 
   <!-- ==================== MODAL 2: INTERACTIVE & PRINTABLE FULL CV ==================== -->
   <!-- School Project Detail + Zoom Modal -->
-  <div id="project-modal" onclick="if (event.target === this) closeProject()" class="fixed inset-0 z-50 hidden bg-ink/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
-    <div class="bg-white border-2 border-ink rounded-xl shadow-brutal-lg w-full max-w-5xl max-h-[94vh] flex flex-col overflow-hidden">
+  <div id="project-modal" onclick="if (event.target === this) closeProject()" class="fixed inset-0 z-50 hidden bg-inkdeep/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-surface border-2 border-ink rounded-xl shadow-brutal-lg w-full max-w-5xl max-h-[94vh] flex flex-col overflow-hidden">
       <!-- Header -->
-      <div class="bg-ink text-white border-b-2 border-ink px-4 py-3 flex items-center justify-between gap-3 shrink-0">
+      <div class="bg-inkdeep text-white border-b-2 border-ink px-4 py-3 flex items-center justify-between gap-3 shrink-0">
         <span id="pm-counter" class="font-mono text-[11px] font-bold truncate"></span>
         <div class="flex items-center gap-2 shrink-0">
-          <button onclick="prevProject()" title="Previous project" class="btn-brutal bg-white text-ink w-8 h-8 rounded flex items-center justify-center text-xs">←</button>
-          <button onclick="nextProject()" title="Next project" class="btn-brutal bg-white text-ink w-8 h-8 rounded flex items-center justify-center text-xs">→</button>
+          <button onclick="prevProject()" title="Previous project" class="btn-brutal bg-surface text-ink w-8 h-8 rounded flex items-center justify-center text-xs">←</button>
+          <button onclick="nextProject()" title="Next project" class="btn-brutal bg-surface text-ink w-8 h-8 rounded flex items-center justify-center text-xs">→</button>
           <button onclick="closeProject()" class="btn-brutal bg-lime text-ink w-8 h-8 rounded flex items-center justify-center font-bold text-sm">✕</button>
         </div>
       </div>
@@ -1519,8 +1692,8 @@
     </div>
   </div>
 
-  <div id="cv-modal" class="fixed inset-0 z-50 hidden bg-ink/70 backdrop-blur-xs flex items-center justify-center p-4">
-    <div id="cv-printable-area" class="bg-white border-2 border-ink rounded-xl shadow-brutal-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+  <div id="cv-modal" class="fixed inset-0 z-50 hidden bg-inkdeep/70 backdrop-blur-xs flex items-center justify-center p-4">
+    <div id="cv-printable-area" class="bg-surface border-2 border-ink rounded-xl shadow-brutal-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
       <!-- Top Controls (Hidden on Print) -->
       <div class="no-print bg-lavender text-white border-b-2 border-ink px-5 py-3.5 flex items-center justify-between sticky top-0 z-10">
         <span class="font-mono text-xs font-bold">CURRICULUM VITAE — CEASAR RIKO PRIYO SUSANTIO</span>
@@ -1529,7 +1702,7 @@
             <i class="fa-solid fa-print"></i>
             <span>PRINT / SAVE PDF</span>
           </button>
-          <button onclick="closeCVModal()" class="btn-brutal bg-white text-ink w-8 h-8 rounded flex items-center justify-center font-bold text-sm">
+          <button onclick="closeCVModal()" class="btn-brutal bg-surface text-ink w-8 h-8 rounded flex items-center justify-center font-bold text-sm">
             ✕
           </button>
         </div>
@@ -1638,7 +1811,7 @@
   </div>
 
   <!-- ==================== TOAST NOTIFICATION BOX (No alert()) ==================== -->
-  <div id="toast-box" class="fixed bottom-5 right-5 z-50 hidden bg-ink text-cream border-2 border-lime px-4 py-3 rounded-lg shadow-brutal font-mono text-xs flex items-center gap-2.5">
+  <div id="toast-box" class="fixed bottom-5 right-5 z-50 hidden bg-inkdeep text-white border-2 border-lime px-4 py-3 rounded-lg shadow-brutal font-mono text-xs flex items-center gap-2.5">
     <span class="w-2.5 h-2.5 rounded-full bg-lime"></span>
     <span id="toast-message">Copied to clipboard!</span>
   </div>
@@ -1801,12 +1974,25 @@
       pmImgWrap.classList.remove('zoomed');
     }
 
+    // Move through only the projects currently visible (respects category filters)
+    function visibleProjectIndexes() {
+      return [...document.querySelectorAll('#school-works article')]
+        .map((card, index) => (card.classList.contains('hidden') ? -1 : index))
+        .filter(index => index >= 0);
+    }
+
     function nextProject() {
-      renderProject((currentProject + 1) % projectDetails.length);
+      const list = visibleProjectIndexes();
+      if (!list.length) return;
+      const pos = list.indexOf(currentProject);
+      renderProject(pos === -1 ? list[0] : list[(pos + 1) % list.length]);
     }
 
     function prevProject() {
-      renderProject((currentProject - 1 + projectDetails.length) % projectDetails.length);
+      const list = visibleProjectIndexes();
+      if (!list.length) return;
+      const pos = list.indexOf(currentProject);
+      renderProject(pos === -1 ? list[0] : list[(pos - 1 + list.length) % list.length]);
     }
 
     function toggleProjectZoom() {
@@ -1826,6 +2012,44 @@
         }
       });
     });
+
+    // School Project category filtering
+    (function initProjectFilters() {
+      const buttons = document.querySelectorAll('.project-filter-btn');
+      const cards = document.querySelectorAll('#school-works article');
+      const countLabel = document.getElementById('project-count');
+      if (!buttons.length) return;
+
+      function applyFilter(category) {
+        buttons.forEach(btn => {
+          const active = btn.dataset.filter === category;
+          btn.classList.toggle('bg-inkdeep', active);
+          btn.classList.toggle('text-white', active);
+          btn.classList.toggle('bg-surface', !active);
+          btn.classList.toggle('text-ink', !active);
+          btn.setAttribute('aria-pressed', String(active));
+        });
+
+        let visible = 0;
+        cards.forEach(card => {
+          const show = category === 'all' || card.dataset.category === category;
+          card.classList.toggle('hidden', !show);
+          if (show) {
+            visible += 1;
+            // Cards first shown by a filter should not stay stuck at opacity 0
+            card.classList.add('is-visible');
+          }
+        });
+
+        if (countLabel) {
+          countLabel.textContent = `${String(visible).padStart(2, '0')} PROJECT${visible === 1 ? '' : 'S'}`;
+        }
+      }
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+      });
+    })();
 
     // Scroll reveal: cards and blocks rise in as they enter the viewport
     (function initScrollReveal() {
@@ -2050,6 +2274,41 @@
       });
     })();
 
+    // Theme toggle (light / dark)
+    (function initThemeToggle() {
+      const btn = document.getElementById('theme-toggle');
+      const meta = document.getElementById('theme-color-meta');
+      if (!btn) return;
+
+      function apply(theme) {
+        const dark = theme === 'dark';
+        document.documentElement.classList.toggle('dark', dark);
+        document.documentElement.dataset.theme = theme;
+        btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+        btn.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
+        btn.setAttribute('aria-pressed', String(dark));
+        if (meta) meta.setAttribute('content', dark ? '#131316' : '#B8F256');
+      }
+
+      apply(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+
+      btn.addEventListener('click', () => {
+        const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+        apply(next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+      });
+
+      // Follow the OS setting only while the visitor has not picked a theme yet
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
+      if (media.addEventListener) {
+        media.addEventListener('change', (e) => {
+          let saved = null;
+          try { saved = localStorage.getItem('theme'); } catch (err) {}
+          if (!saved) apply(e.matches ? 'dark' : 'light');
+        });
+      }
+    })();
+
     // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileNav = document.getElementById('mobile-nav');
@@ -2067,11 +2326,11 @@
     function filterWorks(category) {
       filterButtons.forEach(btn => {
         if (btn.dataset.filter === category) {
-          btn.classList.remove('bg-white', 'text-ink');
-          btn.classList.add('bg-ink', 'text-white');
+          btn.classList.remove('bg-surface', 'text-ink');
+          btn.classList.add('bg-inkdeep', 'text-white');
         } else {
-          btn.classList.remove('bg-ink', 'text-white');
-          btn.classList.add('bg-white', 'text-ink');
+          btn.classList.remove('bg-inkdeep', 'text-white');
+          btn.classList.add('bg-surface', 'text-ink');
         }
       });
 
@@ -2110,7 +2369,7 @@
         .join('');
 
       document.getElementById('cs-modal-tools').innerHTML = item.tools
-        .map(t => `<span class="font-mono text-[11px] font-bold bg-white border border-ink px-2.5 py-1 rounded">${t}</span>`)
+        .map(t => `<span class="font-mono text-[11px] font-bold bg-surface border border-ink px-2.5 py-1 rounded">${t}</span>`)
         .join('');
 
       csModal.classList.remove('hidden');
@@ -2143,7 +2402,20 @@
 <meta charset="UTF-8">
 <title>CV - Ceasar Riko Priyo Susantio</title>
 <script src="https://cdn.tailwindcss.com"><\/script>
-<style>.no-print{display:none!important;} body{font-family:sans-serif;padding:24px;max-width:820px;margin:auto;}</style>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    cream: '#FAF9F6', surface: '#FFFFFF', ink: '#18181B', inkdeep: '#18181B',
+    lavender: '#8B7CFF', lime: '#B8F256', pink: '#FF85A1',
+    butter: '#FDE047', sky: '#A5F3FC', mint: '#BBF7D0'
+  } } } };
+<\/script>
+<style>
+  .no-print{display:none!important;}
+  body{font-family:'Plus Jakarta Sans',sans-serif;padding:24px;max-width:820px;margin:auto;background:#fff;color:#18181B;}
+  #cv-printable-area{border:none!important;box-shadow:none!important;max-height:none!important;overflow:visible!important;}
+  *{box-shadow:none!important;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;}
+</style>
 </head>
 <body>${cvContent}</body>
 </html>`;
