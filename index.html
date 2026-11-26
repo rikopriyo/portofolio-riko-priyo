@@ -27,10 +27,43 @@
   <meta property="og:description" content="DKV student at SMKN 10 Surabaya — graphic design, photography, motion graphics, and 3D work." />
   <meta property="og:url" content="https://rikopriyo.github.io/" />
   <meta property="og:image" content="https://rikopriyo.github.io/foto-ceasar-riko.jpeg" />
+  <meta property="og:image:alt" content="Portrait of Ceasar Riko Priyo Susantio" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Ceasar Riko — DKV Creative" />
   <meta name="twitter:description" content="DKV student at SMKN 10 Surabaya — graphic design, photography, motion graphics, and 3D work." />
   <meta name="twitter:image" content="https://rikopriyo.github.io/foto-ceasar-riko.jpeg" />
+  <meta name="twitter:image:alt" content="Portrait of Ceasar Riko Priyo Susantio" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ceasar Riko Priyo Susantio",
+      "description": "Visual Communication Design (DKV) student at SMKN 10 Surabaya working in graphic design, photography, and motion graphics.",
+      "url": "https://rikopriyo.github.io/",
+      "image": "https://rikopriyo.github.io/foto-ceasar-riko.jpeg",
+      "email": "mailto:rikopriyo58@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Surabaya",
+        "addressRegion": "East Java",
+        "addressCountry": "ID"
+      },
+      "alumniOf": {
+        "@type": "School",
+        "name": "SMKN 10 Surabaya"
+      },
+      "sameAs": [
+        "https://www.instagram.com/softmodification/"
+      ],
+      "knowsAbout": [
+        "Graphic Design",
+        "Photography",
+        "Motion Graphics",
+        "3D Modeling",
+        "Social Media Content"
+      ]
+    }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Space Grotesk, Plus Jakarta Sans, JetBrains Mono, Caveat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -481,6 +514,10 @@
     .nav-link.is-active::after {
       transform: scaleX(1);
     }
+    section[id],
+    footer[id] {
+      scroll-margin-top: 78px;
+    }
     .mobile-nav-link.is-active {
       text-decoration: underline;
       text-decoration-color: #B8F256;
@@ -523,6 +560,61 @@
       #theme-toggle.is-switching .theme-icon-sun,
       #theme-toggle.is-switching .theme-icon-moon {
         animation: none;
+      }
+    }
+
+    /* ==================== Accessibility helpers ==================== */
+    a:focus-visible,
+    button:focus-visible,
+    [role="button"]:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 3px solid #B8F256;
+      outline-offset: 3px;
+    }
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 10000;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: #B8F256;
+      color: #18181B;
+      border: 2px solid #18181B;
+      border-radius: 6px;
+      box-shadow: 4px 4px 0 0 var(--c-shadow);
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      transform: translateY(-180%);
+      transition: transform 0.18s ease;
+    }
+    .skip-link:focus {
+      transform: translateY(0);
+      outline: 3px solid #18181B;
+      outline-offset: 3px;
+    }
+
+    /* Back to top */
+    #back-to-top {
+      visibility: hidden;
+      opacity: 0;
+      translate: 0 10px;
+      transition: opacity 0.2s ease, translate 0.2s ease, visibility 0s linear 0.2s;
+    }
+    #back-to-top.is-visible {
+      visibility: visible;
+      opacity: 1;
+      translate: 0 0;
+      transition: opacity 0.2s ease, translate 0.2s ease, visibility 0s;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .skip-link,
+      #back-to-top {
+        transition: none;
       }
     }
 
@@ -619,6 +711,8 @@
 </head>
 <body class="bg-cream text-ink font-sans antialiased selection:bg-lime selection:text-ink overflow-x-hidden">
 
+  <a href="#about" class="skip-link">SKIP TO CONTENT <span aria-hidden="true">↓</span></a>
+
   <!-- Main Outer Neobrutalist Container -->
   <div class="max-w-[1380px] mx-auto my-0 sm:my-4 md:my-6 border-x-0 sm:border-2 border-ink bg-cream shadow-none sm:shadow-brutal-lg">
 
@@ -644,7 +738,7 @@
           <i class="fa-solid fa-moon theme-icon-moon text-base" aria-hidden="true"></i>
           <i class="fa-solid fa-sun theme-icon-sun text-base" aria-hidden="true"></i>
         </button>
-        <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden px-4 border-l-2 border-ink bg-cream hover:bg-butter flex items-center justify-center">
+        <button id="mobile-menu-btn" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-nav" class="md:hidden px-4 border-l-2 border-ink bg-cream hover:bg-butter flex items-center justify-center">
           <i class="fa-solid fa-bars text-lg"></i>
         </button>
         <a href="#contact" class="bg-lavender text-white font-mono font-bold text-xs sm:text-sm px-4 sm:px-6 py-3.5 border-l-2 border-ink flex items-center gap-2 hover:bg-inkdeep transition-colors">
@@ -1103,7 +1197,7 @@
             <span class="block mt-1 text-ink/50">Click a card to view details and zoom the photo.</span>
           </p>
         </div>
-        <span id="project-count" class="font-mono text-xs font-bold bg-surface border-2 border-ink px-3 py-1.5 rounded shadow-brutal-sm self-start md:self-auto shrink-0">
+        <span id="project-count" aria-live="polite" aria-atomic="true" class="font-mono text-xs font-bold bg-surface border-2 border-ink px-3 py-1.5 rounded shadow-brutal-sm self-start md:self-auto shrink-0">
           10 PROJECTS
         </span>
       </div>
@@ -1826,6 +1920,10 @@
     <span id="toast-message">Copied to clipboard!</span>
   </div>
 
+  <button id="back-to-top" type="button" aria-label="Back to top" title="Back to top" class="btn-brutal fixed left-5 bottom-5 z-40 bg-lime text-inkdeep w-11 h-11 rounded-lg flex items-center justify-center">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
   <!-- Custom cursor (desktop only) -->
   <div id="cursor-ring" class="cursor-ring" aria-hidden="true">
     <span id="cursor-label" class="cursor-label"></span>
@@ -2224,6 +2322,8 @@
         if (el.closest('#pm-img-wrap')) return 'ZOOM';
         if (el.closest('#school-works article')) return 'OPEN';
         if (el.closest('.work-card')) return 'DETAILS';
+        if (el.closest('#back-to-top')) return 'TOP';
+        if (el.closest('#theme-toggle')) return 'THEME';
         if (el.closest('a')) return 'OPEN';
         return '';
       }
@@ -2429,14 +2529,48 @@
       }
     })();
 
+    // Back to top (appears after the hero)
+    (function initBackToTop() {
+      const btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let ticking = false;
+
+      function update() {
+        const y = window.scrollY || document.documentElement.scrollTop;
+        btn.classList.toggle('is-visible', y > 700);
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      }, { passive: true });
+      window.addEventListener('resize', update);
+
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+        const brand = document.querySelector('header a[href="#"]');
+        if (brand) brand.focus({ preventScroll: true });
+      });
+
+      update();
+    })();
+
     // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileNav = document.getElementById('mobile-nav');
     mobileMenuBtn.addEventListener('click', () => {
-      mobileNav.classList.toggle('hidden');
+      const nowHidden = mobileNav.classList.toggle('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', String(!nowHidden));
     });
     mobileNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => mobileNav.classList.add('hidden'));
+      link.addEventListener('click', () => {
+        mobileNav.classList.add('hidden');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      });
     });
 
     // Work / Experience Category Filtering
